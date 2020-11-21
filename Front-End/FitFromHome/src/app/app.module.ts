@@ -18,6 +18,7 @@ import { SignupComponent } from './signup/signup.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     ClassListFilerPipe,
     CoachListFilerPipe, 
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+
   ],
   imports: [
     BrowserModule,

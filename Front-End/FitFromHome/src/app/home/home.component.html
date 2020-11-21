@@ -1,1 +1,23 @@
-<p>home works!</p>
+<h1>View Your Upcoming Classes:</h1>
+  <div [ngSwitch]="view">
+    <mwl-calendar-month-view
+      *ngSwitchCase="CalendarView.Month"
+      [viewDate]="viewDate"
+    >
+    </mwl-calendar-month-view>
+  </div>
+  <br/>
+  <br/>
+  <div>
+    <h1>Reccommended Classes For You!</h1>
+  <app-class-list></app-class-list>
+  </div>
+  
+  <div>
+    <h1>Your Progress: </h1>
+  </div>
+
+
+
+  
+ 
