@@ -1,45 +1,58 @@
 import { Component, OnInit } from '@angular/core';
 import { HTTPService } from 'src/app/services/http.service';
 import { Class } from '../class.model';
-//import { Explore } from '../explore.component';
 
 @Component({
-    selector: 'app-class-list',
-    templateUrl: './class-list.component.html',
-    styleUrls: ['./class-list.component.scss']
+	selector: 'app-class-list',
+	templateUrl: './class-list.component.html',
+	styleUrls: ['./class-list.component.scss']
 })
-export class ClassListComponent implements OnInit{
-    searchWord: string;
-    fetchedClasses: any[] = [];
-    classes: Class[] = [
-        {
-          classId: 'IFp1Metqu2ue7uXPjeJU',
-          title: "Yoga with Demir!",
-          createdBy: "Demir Mensah",
-          description: "Beginner's yoga session. All you need is a yoga mat and some space around you!",
-          category: "Yoga",
-          price: "5",
-          startDate: new Date().getTime(),
-          endDate: (new Date().getTime() + 3600)
-        },
-        {
-          classId: '124',
-          title: "Weight with Arya!",
-          createdBy: "Arya Vatan",
-          description: "Weights session with Arya. Tiem to get big!",
-          category: "Strength",
-          price: "15",
-          startDate: new Date().getTime(),
-          endDate: (new Date().getTime() + 3600)
-        }
-      ];
+export class ClassListComponent implements OnInit {
+	searchWord: string;
+	testVar: any;
 
-      constructor(private httpService: HTTPService) {}
+	// holds all classes in db
+	fetchedClasses: Class[] = [];
 
-      ngOnInit() {
-        this.httpService.getAllClasses().subscribe(classArray => {
-            this.fetchedClasses = classArray;
-            console.log(this.fetchedClasses);
-          }); 
-        }
+	// holds all filters for classes
+	filters: any[] = [{name:"All", class:"selected"}];
+
+	constructor(private httpService: HTTPService) { }
+
+	ngOnInit() {
+		// Get Classes
+		this.httpService.getAllClasses().subscribe(classArray => {
+			this.fetchedClasses = classArray;
+			console.log(this.fetchedClasses);
+
+			// Get Filters
+			this.fetchedClasses.forEach(session => {
+				if (this.filters.filter(e => e.name == session.category).length == 0){
+					this.filters.push({
+						name: session.category,
+						class: ""
+					});
+				}
+			});
+			console.log(this.filters);
+		});
+	}
+
+	// Update the filter selected and the filtered classes
+	filterSelected(filterName){
+		this.filters.forEach(filter => {
+			if (filter.name == filterName){
+				filter.class = "selected";
+				
+				if (filter.name == "All")
+					this.searchWord = "";
+				else
+					this.searchWord = filter.name;
+				
+			}
+			else {
+				filter.class = "";
+			}
+		});
+	}
 }
