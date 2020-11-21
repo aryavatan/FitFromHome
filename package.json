@@ -15,5 +15,9 @@
     "url": "https://github.com/aryavatan/FitFromHome/issues"
   },
   "homepage": "https://github.com/aryavatan/FitFromHome#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "curl": "^0.1.4",
+    "express": "^4.17.1"
+  }
 }
