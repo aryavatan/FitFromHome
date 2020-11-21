@@ -87,3 +87,35 @@ section{
         }
     }
 }
+
+div[id=status] {
+	width: 100%;
+	max-width: 500px;
+	text-align: center;
+	padding: 10px;
+	margin: 20px auto 20px;
+	border-radius: 20px;
+
+	font-size: 20px;
+
+	&.error {
+		background-color: $red;
+		color: white;
+		animation: status 4s ease forwards;
+	}
+}
+
+@keyframes status {
+	0%{
+		opacity: 1;
+		pointer-events: all;
+	}
+	90%{
+		opacity: 1;
+		pointer-events: all;
+	}
+	100%{
+		opacity: 0;
+		pointer-events: none;
+	}
+}
