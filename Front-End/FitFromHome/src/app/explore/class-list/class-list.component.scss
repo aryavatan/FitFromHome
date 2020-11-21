@@ -43,20 +43,31 @@ button {
 		background-color: $red;
 	}
 }
+.row {
+	display: flex;
+	flex-wrap: wrap;
+    flex-direction: row;
+	margin: 0;
 
-.classes-div {
-	border: 1px solid black;
-	border-radius: 5%;
-	width: 40%;
-	float: left;
-	margin-left: 5%;
-	cursor: pointer;
+	.column {
+		border: 1px solid black;
+		border-radius: 20px;
+		float: left;
+    	width: 30%;
+    	display: inherit;  // Sets project heights to be equal
+
+		margin: 5px;
+
+		cursor: pointer;
+		
+		.content-box {
+			padding: 10px;
+		}
+	}
+
 }
 
-.content-box {
-	height: 100%;
-}
 
-.classes-div:hover {
+.column:hover {
 	background-color: $orange;
 }

@@ -9,8 +9,8 @@
 </div>
 
 
-<div class="container">
-    <div class="classes-div" *ngFor="let class of fetchedClasses | classListFilter: searchWord" [routerLink]="['/class', class.classId]">
+<div class="row">
+    <div class="column" *ngFor="let class of fetchedClasses | classListFilter: searchWord" [routerLink]="['/class', class.classId]">
         <div class="content-box">
             <h1>{{ class.title }}</h1>
             <p>Instructor: {{ class.createdBy }}</p>
