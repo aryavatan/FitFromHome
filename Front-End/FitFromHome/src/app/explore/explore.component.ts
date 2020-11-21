@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { HTTPService } from '../services/http.service';
-import { Class } from './class.model';
 
 @Component({
   selector: 'app-explore',
