@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, single, tap } from 'rxjs/operators';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
+import { map } from 'rxjs/operators';
 import { Class } from '../explore/class.model';
 import { Subject } from 'rxjs';
 
@@ -23,7 +21,7 @@ interface ClassData {
 })
 export class HTTPService {
 	private classes: Class[] = [];
-	private classesUpdated = new Subject<Class[]>();
+	//private classesUpdated = new Subject<Class[]>();
 
 	constructor(private http: HttpClient) { }
 
@@ -70,4 +68,9 @@ export class HTTPService {
 		})
 		)
 	}
+
+	getClass(id: string) {
+		return this.http.get<{fetchedClass}>(this.url + `classes/${id}`);
+	}
+
 }

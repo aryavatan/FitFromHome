@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Class } from '../explore/class.model';
+import { HTTPService } from '../services/http.service';
 
 @Component({
   selector: 'app-class',
@@ -10,28 +11,30 @@ import { Class } from '../explore/class.model';
 export class ClassComponent implements OnInit {
   // id of class clicked
   selectedId;
+  // holds info of class being fetched
+  classData: Class;
 
-  classes: Class[] = [
-    {
-      classId: '123',
-      title: "Yoga with Demir!",
-      createdBy: "Demir Mensah",
-      description: "Beginner's yoga session. All you need is a yoga mat and some space around you!",
-      category: "Yoga",
-      price: "5",
-      startDate: new Date().getTime(),
-      endDate: (new Date().getTime() + 3600)
-    }
-  ];
-
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private http: HTTPService) {
     if (this.route.snapshot.params['id']) {
       this.selectedId = this.route.snapshot.paramMap.get('id');
     }
    }
 
-  ngOnInit(): void {
-    // would need to call getClass(this.selectedId) here and store fields on a local copy of the class
+  ngOnInit() {
+    this.http.getClass(this.selectedId).subscribe(response => {
+      const fetchedClass: Class = {
+        classId: response.fetchedClass.id,
+        title: response.fetchedClass.title,
+        createdBy: response.fetchedClass.createdBy,
+        description: response.fetchedClass.description,
+        category: response.fetchedClass.category,
+        price: response.fetchedClass.price,
+        startDate: response.fetchedClass.startDate,
+        endDate: response.fetchedClass.endDate
+      }
+      this.classData = fetchedClass;
+      console.log(this.classData)
+    });
   }
 
 }

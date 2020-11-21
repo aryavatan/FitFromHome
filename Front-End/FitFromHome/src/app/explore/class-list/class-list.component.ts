@@ -10,13 +10,10 @@ import { Class } from '../class.model';
 })
 export class ClassListComponent implements OnInit{
     searchWord: string;
-    testVar: any;
-    
-    // holds classes in db
     fetchedClasses: any[] = [];
     classes: Class[] = [
         {
-          classId: '123',
+          classId: 'IFp1Metqu2ue7uXPjeJU',
           title: "Yoga with Demir!",
           createdBy: "Demir Mensah",
           description: "Beginner's yoga session. All you need is a yoga mat and some space around you!",
@@ -44,8 +41,5 @@ export class ClassListComponent implements OnInit{
             this.fetchedClasses = classArray;
             console.log(this.fetchedClasses);
           }); 
-      }
-
-
-
+        }
 }
