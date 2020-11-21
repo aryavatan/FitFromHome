@@ -8,6 +8,8 @@ export class HTTPService {
 
 	constructor(private http: HttpClient) { }
 
+	url = "http://localhost:8080/api/";
+
 	// Sign up as new user
 	postNewUser(email, password) {
 		let data = {
@@ -28,5 +30,9 @@ export class HTTPService {
 
 		return true;
 		// return this.http.get("localhost:8080/api/user", data).toPromise();
+	}
+
+	getAllClasses(){
+		return this.http.get(this.url + "classes").toPromise();
 	}
 }

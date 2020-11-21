@@ -34,9 +34,15 @@ app.get('/api/profiles', (req, res) => {
 
 // GET ALL CLASSES
 app.get('/api/classes', (req, res) => {
-	db.collection('classes').get().then(snapshot =>{
+	let classes = [];
+
+	db.collection('classes').get().then((snapshot) =>{
 		snapshot.forEach((doc) => {
 			console.log(doc.id, '=>', doc.data());
+			
+			
+
+			// classes.append(doc.data());
 		});
 	});
 });
