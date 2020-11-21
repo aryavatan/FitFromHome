@@ -52,6 +52,7 @@ export class HTTPService {
 
 	// 
 	getAllClasses(){
+		this.classes = [];
 		return this.http.get<{fetchedClasses}>(this.url + "classes").pipe(map(classData =>{
 			classData.fetchedClasses.map(singleClass => {
 				this.classes.push({
