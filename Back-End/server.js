@@ -11,12 +11,19 @@ admin.initializeApp({
 });
 const db = admin.firestore();
 
+// API Routes
+const ClassRoutes = require('./API/classRoutes.js');
+
 const app = express();
 
 // ======================================================================================
 // Middleware
 app.use(bodyParser.json());
 app.use(cors());
+
+// ======================================================================================
+// Use Routes
+app.use('/api/classes', ClassRoutes);
 
 // ======================================================================================
 // Start Server
