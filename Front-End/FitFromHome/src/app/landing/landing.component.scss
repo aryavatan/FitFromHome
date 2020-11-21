@@ -1,0 +1,40 @@
+$purple:#444166;
+$orange:#f6b579;
+$red:#e64861;
+$grey:#cacace;
+
+div.button{
+	max-width: 120px;
+	max-height: 100px;
+	background-color: $purple;
+
+	// Rounded corners ;)
+	border-radius: 8px;
+
+	// Smooth transitions on hover
+	transition: 0.1s ease;
+	
+	p {
+		text-align: center;
+		font-weight: bold;
+		color: white;
+		padding: 10px;
+		font-size: 22px;
+
+		// Makes the button text unselectable
+		-webkit-user-select: none; /* Safari */        
+		-moz-user-select: none; /* Firefox */
+		-ms-user-select: none; /* IE10+/Edge */
+		user-select: none; /* Standard */
+	}
+
+	// On hover
+	&:hover {
+		background-color: $red;
+	}
+
+	// On Click
+	&:active {
+        background-color: darken($red, 20%);
+    }
+}
