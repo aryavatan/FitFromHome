@@ -1,1 +1,19 @@
-<p>explore works!</p>
+<h2>Explore</h2>
+<ul>
+    <li>
+        <button>Classes</button>
+    </li>
+    <li>
+        <button>Coaches</button>
+    </li>
+</ul>
+
+<div class="container">
+    <div class="classes-div" *ngFor="let class of classes">
+        <div>
+            <h1>{{ class.title }}</h1>
+            <p>Instructor: {{ class.createdBy }}</p>
+        </div>
+
+    </div>
+</div>
