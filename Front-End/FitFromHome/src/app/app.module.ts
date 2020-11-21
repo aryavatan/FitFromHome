@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +13,8 @@ import { ClassListComponent } from './explore/class-list/class-list.component';
 import { CoachListComponent } from './explore/coach-list/coach-list.component';
 import { ClassListFilerPipe } from './explore/class-list/class-list-filter.pipe';
 import { CoachListFilerPipe } from './explore/coach-list/coach-list-filter.pipe';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -24,11 +27,14 @@ import { CoachListFilerPipe } from './explore/coach-list/coach-list-filter.pipe'
     ClassListComponent,
     CoachListComponent,
     ClassListFilerPipe,
-    CoachListFilerPipe
+    CoachListFilerPipe, 
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

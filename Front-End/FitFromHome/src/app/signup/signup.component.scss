@@ -1,0 +1,126 @@
+$purple:#444166;
+$orange:#f6b579;
+$red:#e64861;
+$grey:#cacace;
+
+img {
+	max-width: 300px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+section{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+	flex-direction: column;
+	
+	margin-top: 50px;
+
+    div.form{
+        box-sizing: border-box;
+		height: auto;
+		width: 100%;
+        max-width: 550px;
+        margin: 0 auto;
+        background-color: $orange;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 20px;
+
+        border: solid $purple 1px;
+		border-radius: 20px;
+		
+		box-shadow: 2px 2px $purple;
+    
+        div.form-group{
+            width: 100%;
+            margin-top: 20px;
+			font-size: 20px;
+			
+			label {
+				color: $purple;
+				font-size: 22px;
+				font-weight: bold;
+			}
+    
+            input,
+            textarea{
+                width: 100%;
+                padding: 5px;
+                font-size: 20px;  
+                border: 1px solid $purple;
+                margin-top: 5px;
+                border-radius: 8px;
+
+                &:focus{
+                    outline: none !important;
+                    border: 1px solid $red;
+                    box-shadow: 0 0 1px black;
+                }
+            }
+    
+            textarea {
+                font-family: "Roboto", sans-serif;
+                resize: vertical;
+            }
+    
+        }
+        
+        button {
+            background-color: $purple;
+            width: 100%;
+            border: none;
+            outline: none;
+            padding: 10px;
+            font-size: 24px;
+            border-radius: 20px;
+			
+			color: white;
+			font-weight: bold;
+
+            text-align: center;
+            cursor: pointer;
+            margin-top: 20px;
+			transition: .2s ease;
+    
+            &:hover {
+                background-color: $red;
+            }
+        }
+    }
+
+    div[id=status] {
+        width: 100%;
+        max-width: 500px;
+        text-align: center;
+        padding: 10px;
+        margin: 20px auto 20px;
+        border-radius: 20px;
+    
+        font-size: 20px;
+    
+        &.error {
+            background-color: $red;
+            color: white;
+            animation: status 4s ease forwards;
+        }
+    }
+    
+    @keyframes status {
+        0%{
+            opacity: 1;
+            pointer-events: all;
+        }
+        90%{
+            opacity: 1;
+            pointer-events: all;
+        }
+        100%{
+            opacity: 0;
+            pointer-events: none;
+        }
+    }
+}

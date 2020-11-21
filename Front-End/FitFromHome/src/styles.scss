@@ -19,7 +19,7 @@ body {
 
 header {
     background: $purple;
-    padding: 1em 0;
+    padding: 1em 0 11px 0;
 
     a {
         color: white;
@@ -30,8 +30,7 @@ header {
         font-weight: bold;
         font-family: "Roboto Condensed", sans-serif;
         font-size: 150%;
-        color: $orange;
-        // margin-left: 1em;
+		color: $orange;
     }
 
     nav {
