@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,6 +9,12 @@ import { HomeComponent } from './home/home.component';
 import { ExploreComponent } from './explore/explore.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ClassComponent } from './class/class.component';
+import { ClassListComponent } from './explore/class-list/class-list.component';
+import { CoachListComponent } from './explore/coach-list/coach-list.component';
+import { ClassListFilerPipe } from './explore/class-list/class-list-filter.pipe';
+import { CoachListFilerPipe } from './explore/coach-list/coach-list-filter.pipe';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -21,13 +28,20 @@ import { environment } from '../environments/environment';
     HomeComponent,
     ExploreComponent,
     ProfileComponent,
-    ClassComponent
+    ClassComponent,
+    ClassListComponent,
+    CoachListComponent,
+    ClassListFilerPipe,
+    CoachListFilerPipe, 
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
  	  AngularFirestoreModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

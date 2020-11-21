@@ -1,0 +1,52 @@
+<div class="category-list">
+    <ul>
+        <li>
+            <button (click)="searchWord = ''">
+                All
+            </button>
+        </li>
+        <li>
+            <button (click)="searchWord = 'Strength'">
+                Strength
+            </button>
+        </li>
+        <li>
+            <button (click)="searchWord = 'Yoga'">
+                Yoga
+            </button>
+        </li>
+        <li>
+            <button (click)="searchWord = 'Boxing'">
+                Boxing
+            </button>
+        </li>
+        <li>
+            <button (click)="searchWord = 'Cardio'">
+                Cardio
+            </button>
+        </li>
+        <li>
+            <button (click)="searchWord = 'HIIT'">
+                HIIT
+            </button>
+        </li>
+        <li>
+            <button (click)="searchWord = 'Crossfit'">
+                Crossfit
+            </button>
+        </li>
+    </ul>
+</div>
+
+
+
+<div class="container">
+    <div class="classes-div" *ngFor="let class of classes | classListFilter: searchWord" [routerLink]="['/class', class.classId]">
+        <div class="content-box">
+            <h1>{{ class.title }}</h1>
+            <p>Instructor: {{ class.createdBy }}</p>
+            <p>${{class.price}}/session</p>
+            <p>{{class.description}}</p>
+        </div>
+    </div>
+</div>

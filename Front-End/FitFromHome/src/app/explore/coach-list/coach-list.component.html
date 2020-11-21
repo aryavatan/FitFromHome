@@ -1,0 +1,47 @@
+<div class="category-list">
+    <ul>
+        <li>
+            <button (click)="searchWord = ''">
+                All
+            </button>
+        </li>
+        <li>
+            <button (click)="searchWord = 'Strength'">
+                Strength
+            </button>
+        </li>
+        <li>
+            <button (click)="searchWord = 'Yoga'">
+                Yoga
+            </button>
+        </li>
+        <li>
+            <button (click)="searchWord = 'Boxing'">
+                Boxing
+            </button>
+        </li>
+        <li>
+            <button (click)="searchWord = 'Cardio'">
+                Cardio
+            </button>
+        </li>
+        <li>
+            <button (click)="searchWord = 'HIIT'">
+                HIIT
+            </button>
+        </li>
+        <li>
+            <button (click)="searchWord = 'Crossfit'">
+                Crossfit
+            </button>
+        </li>
+    </ul>
+</div>
+
+<div class="container">
+    <div class="coach" *ngFor="let coach of coaches | coachListFilter: searchWord" [routerLink]="['/profile', coach.coachId]">
+        <h1>{{coach.name}}</h1>
+        <h5>{{coach.category}}</h5>
+    </div>
+
+</div>
