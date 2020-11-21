@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Class } from '../explore/class.model';
 import { Subject } from 'rxjs';
+import { environment } from 'src/environments/environment'
 
 
 interface ClassData {
@@ -14,6 +15,16 @@ interface ClassData {
     price: string;
     startDate: any;
     endDate: any;
+}
+
+interface AuthResponseData {
+	kind: string;
+	idToken: string;
+	email: string;
+	refreshToken: string;
+	localId: string;
+	expiresIn: string;
+	registered?: boolean;
 }
 
 @Injectable({
@@ -28,14 +39,12 @@ export class HTTPService {
 	url = "http://localhost:8080/api/";
 
 	// Sign up as new user
-	postNewUser(email, password) {
-		let data = {
-			email: email,
-			password: password
-		}
+	postNewUser(email: string, password: string) {
 
-		return true;
-		// return this.http.post("localhost:8080/api/user", data).toPromise();
+		// return this.http.post(this.url + "signup", {email: email, password: password})
+		return this.http.post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebase.apiKey}`, 
+		{email: email, password: password, returnSecureToken: true}
+		)
 	}
 
 	// Login User
@@ -45,11 +54,14 @@ export class HTTPService {
 			password: password
 		}
 
-		return true;
-		// return this.http.get("localhost:8080/api/user", data).toPromise();
+		return this.http.post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebase.apiKey}`,
+		{email: email, password: password, returnSecureToken: true}
+		)
+		
+		
 	}
 
-	// 
+
 	getAllClasses(){
 		return this.http.get<{fetchedClasses}>(this.url + "classes").pipe(map(classData =>{
 			classData.fetchedClasses.map(singleClass => {
