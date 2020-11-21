@@ -1,4 +1,20 @@
+p {
+    font-size: 16px;
+}
+
+
 .classes-div {
     border: 1px solid black;
-    width: 50%;
+    border-radius: 5%;
+    width: 40%;
+    float: left;
+    margin-left: 5%;
+  }
+
+  .content-box {
+      height: 100%;
+  }
+
+  .classes-div:hover {
+      background-color: #f6b579;
   }

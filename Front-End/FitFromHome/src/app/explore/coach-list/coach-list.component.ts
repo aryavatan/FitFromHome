@@ -8,10 +8,12 @@ import { Component } from '@angular/core';
 export class CoachListComponent{
     coaches = [
         {
+          id: "1",
           name: "demir",
           category: "yoga"
         },
         {
+          id: "2",
           name: "arya",
           category: "strenght"
         }

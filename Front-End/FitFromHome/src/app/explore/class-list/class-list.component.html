@@ -1,11 +1,10 @@
 <div class="container">
-    <div class="classes-div" *ngFor="let class of classes">
-        <div>
+    <div class="classes-div" *ngFor="let class of classes" [routerLink]="['/class', class.classId]">
+        <div class="content-box">
             <h1>{{ class.title }}</h1>
             <p>Instructor: {{ class.createdBy }}</p>
             <p>${{class.price}}/session</p>
             <p>{{class.description}}</p>
         </div>
-
     </div>
 </div>

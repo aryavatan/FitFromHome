@@ -1,8 +1,7 @@
 <div class="container">
-    <div class="coach" *ngFor="let coach of coaches">
+    <div class="coach" *ngFor="let coach of coaches" [routerLink]="['/profile', coach.coachId]">
         <h1>{{coach.name}}</h1>
         <h5>{{coach.category}}</h5>
-
     </div>
 
 </div>
