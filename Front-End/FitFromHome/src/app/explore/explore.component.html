@@ -1,20 +1,22 @@
-<h1>Explore</h1>
+<div class="container">
+    <h1>Explore</h1>
 
-<ul>
-    <li>
-        <button (click)="toggleCategory()">Classes</button>
-    </li>
-    <li>
-        <button (click)="toggleCategory()">Coaches</button>
-    </li>
-</ul>
-<hr>
+    <ul class="classandcoach">
+        <li>
+            <button (click)="toggleClasses()" [class]="classesButtonClass">Classes</button>
+        </li>
+        <li>
+            <button (click)="toggleCoaches()" [class]="coachesButtonClass">Coaches</button>
+        </li>
+    </ul>
 
+    <hr>
 
-<div *ngIf="classesSelected">
-    <app-class-list></app-class-list>
-</div>
+    <div *ngIf="classesSelected">
+        <app-class-list></app-class-list>
+    </div>
 
-<div *ngIf="!classesSelected">
-    <app-coach-list></app-coach-list>
+    <div *ngIf="!classesSelected">
+        <app-coach-list></app-coach-list>
+    </div>
 </div>

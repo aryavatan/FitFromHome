@@ -1,0 +1,25 @@
+$purple:#444166;
+$orange:#f6b579;
+$red:#e64861;
+$grey:#cacace;
+
+
+section {
+    //align-items: center;
+    // justify-content: center;
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+    margin: 3% auto;
+    border: solid $purple 1px;
+    border-radius: 20px;
+    height: 80vh;
+    background-color: $orange;
+
+    div.description {
+        align-items: center;
+        justify-content: center;
+        
+    }
+}
+

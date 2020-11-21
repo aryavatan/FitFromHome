@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { HTTPService } from '../services/http.service';
 
 @Component({
 	selector: 'app-login',
@@ -14,7 +16,7 @@ export class LoginComponent implements OnInit {
 	statusAnimation: any;  // String for activating animation of status message
 	statusText: any;  // Text inside of status message
 
-	constructor() { }
+	constructor(private httpService: HTTPService, private router: Router) { }
 
 	ngOnInit(): void {
 	}
@@ -22,16 +24,22 @@ export class LoginComponent implements OnInit {
 	async onSubmit(loginForm) {
 		let email = loginForm.value.email;
 		let password = loginForm.value.password;
+		console.log()
 
 		if (this.validateEmail(email) == false) {
 			this.activateStatusMessage();
+			console.log('pass email check')
 		}
 		else if (this.validatePassword(password) == false){
 			this.activateStatusMessage();
+			console.log('pass pass check')
 		}
 		else{
-			// LOGIN HERE!!!!!!
-			alert('login');
+			
+			this.httpService.loginUser(email, password).subscribe(resData =>{
+				console.log(resData);
+				this.router.navigateByUrl('/');
+			});
 		}
 	}
 
@@ -41,12 +49,12 @@ export class LoginComponent implements OnInit {
 			this.statusText = 'Please enter a valid email';
 			return false;
 		}
-		else if (email.includes("@") && email.includes(".") && email.length < 9) {
+		else if ((!email.includes("@") && !email.includes(".")) || email.length < 9) {
 			this.statusText = 'Please enter a valid email';
-			return true;
+			return false;
 		}
 		else {
-			return false;
+			return true;
 		}
 	}
 

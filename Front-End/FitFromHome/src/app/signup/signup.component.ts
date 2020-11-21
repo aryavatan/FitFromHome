@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { HTTPService } from '../services/http.service';
 
 @Component({
 	selector: 'app-signup',
@@ -17,16 +19,21 @@ export class SignupComponent implements OnInit {
 	statusAnimation: any;  // String for activating animation of status message
 	statusText: any;  // Text inside of status message
 
-	constructor() { }
+	constructor(private httpService: HTTPService, private router: Router) { }
 
 	ngOnInit(): void {
 	}
 
 	async onSubmit(signupForm) {
+		this.email = signupForm.value.email;
+		this.password = signupForm.value.password;
+		this.fname = signupForm.value.fname;
+		this.lname = signupForm.value.lname;
 		if (this.validateName(this.fname, this.lname) == false){
 			this.activateStatusMessage();
 		}
 		else if (this.validateEmail(this.email) == false){
+			
 			this.activateStatusMessage();
 		}
 		else if (this.validatePassword(this.password) == false){
@@ -34,7 +41,11 @@ export class SignupComponent implements OnInit {
 		}
 		else {
 			// SIGN UP HERE !!!!!
-			alert('signup');
+			console.log('req sent ')
+			this.httpService.postNewUser(this.email, this.password).subscribe(resData => {
+				console.log(resData)
+				this.router.navigateByUrl('/');
+			});
 		}
 	}
 

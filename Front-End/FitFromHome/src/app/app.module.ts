@@ -19,6 +19,10 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 
+import { environment } from '../environments/environment';
+import { HttpClientModule } from '@angular/common/http';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +43,11 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+<<<<<<< HEAD
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
+=======
+    HttpClientModule,
+>>>>>>> 4813236e691e3cc32ac2ecb5f752c998011fdfa1
   ],
   providers: [],
   bootstrap: [AppComponent]
