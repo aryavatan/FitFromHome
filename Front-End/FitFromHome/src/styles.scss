@@ -1,1 +1,64 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css?family=Kulim+Park|Roboto|Roboto+Condensed&display=swap");
+
+$purple: #444166;
+$orange: 	#f6b579;
+$red: #e64861;
+$grey: #cacace;
+
+body {
+    margin: 0;
+    font-family: "Roboto", "sans-serif";
+    font-size: 18px;
+    background-color: $grey;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+header {
+    background: $purple;
+    padding: 1em 0;
+
+    a {
+        color: white;
+        text-decoration: none;
+    }
+
+    a.logo {
+        font-weight: bold;
+        font-family: "Roboto Condensed", sans-serif;
+        font-size: 150%;
+        color: $orange;
+        // margin-left: 1em;
+    }
+
+    nav {
+        float: right;
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            display: flex;
+
+            li a {
+                // font-family: 'Roboto Condensed', sans-serif;
+                padding: 1em;
+                transition: 0.2s ease;
+                
+                &.selected {
+                   color: $orange; 
+                }
+
+                &:hover {
+                    background: $orange;
+                    color: $purple;
+                    font-weight: bold;
+                    font-size: 110%;
+                }
+
+            }
+        }
+    }
+}
