@@ -1,1 +1,24 @@
-<p>login works!</p>
+
+<section>
+	
+	<div class="form">
+		<img src="../../assets/Logos/Fit_from_home-02.png" alt="">
+		<form (submit)="onSubmit(loginForm)" #loginForm="ngForm">
+			<div class="form-group">
+				<label for="email">Email</label>
+				<input type="text" id="email" name="email" />
+			</div>
+			<div class="form-group">
+				<label for="password">Password</label>
+				<input type="password" id="password" name="password" />
+			</div>
+			<div class="form-group">
+				<button type="submit">Login</button>
+				<button routerLink='/signup'>Sign Up</button>
+			</div>
+		</form>
+
+	</div>
+</section>
+
+

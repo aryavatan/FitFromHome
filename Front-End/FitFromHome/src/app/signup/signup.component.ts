@@ -12,4 +12,8 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  async onSubmit(signupForm){
+		alert('login');
+	}
+
 }
