@@ -43,11 +43,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-<<<<<<< HEAD
-    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
-=======
-    HttpClientModule,
->>>>>>> 4813236e691e3cc32ac2ecb5f752c998011fdfa1
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
