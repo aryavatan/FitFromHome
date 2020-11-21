@@ -29,4 +29,9 @@ export class HTTPService {
 		return true;
 		// return this.http.get("localhost:8080/api/user", data).toPromise();
 	}
+
+	getClass(id: string) {
+		// backend call to fetch single place by id here
+	}
+
 }

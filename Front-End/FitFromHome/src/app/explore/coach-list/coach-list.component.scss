@@ -1,3 +1,9 @@
+$purple:#444166;
+$orange:#f6b579;
+$red:#e64861;
+$grey:#cacace;
+
+
 ul {
     list-style: none;
     padding: 0;
@@ -9,10 +15,26 @@ ul {
   }
 
   button {
-    font-size: 18px;
+    background-color: $purple;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 8px;
+    font-size: 20px;
+    border-radius: 20px;
+    
     color: white;
-    background-color: #444166;
+
+
+    text-align: center;
+    cursor: pointer;
+    transition: .2s ease;
+
+    &:hover {
+        background-color: $red;
+    }
   }
+
 
 .coach {
     border: 1px solid black;
@@ -20,8 +42,9 @@ ul {
     width: 40%;
     float: left;
     margin-left: 5%;
+    cursor: pointer;
 }
 
 .coach:hover {
-    background-color: #f6b579;
+    background-color: $orange;
 }

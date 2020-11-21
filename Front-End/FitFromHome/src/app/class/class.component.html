@@ -1,1 +1,31 @@
-<p>class works!</p>
+<section>
+    <div class="class-form">
+        <div class="header">
+            <h1> {{ classes[0].title }} </h1>
+            <h3>{{ classes[0].createdBy }}</h3>
+            <h5>${{ classes[0].price }}/session</h5>
+        </div>
+
+        <div class="description">
+            <p>
+                {{ classes[0].description }}
+            </p>
+        </div>
+
+        <div class="times">
+            <p>
+                Start Time: {{ classes[0].startDate }}
+            </p>
+            <p>
+                End Time: {{ classes[0].endDate }}
+            </p>
+        </div>
+
+        <div>
+            <button>
+                Register!
+            </button>
+        </div>
+
+    </div>
+</section>
