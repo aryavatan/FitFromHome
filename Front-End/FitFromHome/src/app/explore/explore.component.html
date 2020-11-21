@@ -1,19 +1,38 @@
 <h2>Explore</h2>
 <ul>
     <li>
-        <button>Classes</button>
+        <button (click)="toggleCategory()">Classes</button>
     </li>
     <li>
-        <button>Coaches</button>
+        <button (click)="toggleCategory()">Coaches</button>
     </li>
 </ul>
+<hr>
 
-<div class="container">
-    <div class="classes-div" *ngFor="let class of classes">
-        <div>
-            <h1>{{ class.title }}</h1>
-            <p>Instructor: {{ class.createdBy }}</p>
-        </div>
 
+<div *ngIf="classesSelected">
+    <div class="category-list">
+        <ul>
+            <li>
+                <button>
+                    All
+                </button>
+            </li>
+            <li>
+                <button>
+                    Strength
+                </button>
+            </li>
+            <li>
+                <button>
+                    Yoga
+                </button>
+            </li>
+        </ul>
     </div>
+    <app-class-list></app-class-list>
+</div>
+
+<div *ngIf="!classesSelected">
+    <app-coach-list></app-coach-list>
 </div>
