@@ -12,6 +12,7 @@ export class ProfileComponent implements OnInit {
   profile: Profile[] = [ 
       {
         fullName: "Chelsea",
+        id: "123",
         category: "Fitness",
         description: "I'm healthy"
     }
