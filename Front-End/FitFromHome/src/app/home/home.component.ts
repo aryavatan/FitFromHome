@@ -7,9 +7,6 @@ import {
     CalendarView,
   } from 'angular-calendar';
 
-import { ClassListComponent } from '../explore/class-list/class-list.component';
-import { Class } from '../explore/class.model';
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -23,8 +20,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-
+  
   view: CalendarView = CalendarView.Month;
 
   CalendarView = CalendarView;
