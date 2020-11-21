@@ -25,21 +25,12 @@ app.use(cors());
 // ======================================================================================
 // Use Routes
 app.use('/api/classes', ClassRoutes);
-app.use('/api/profiles',ProfileRoutes);
+app.use('/api/profiles', ProfileRoutes);
 
 // ======================================================================================
 // Start Server
 const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Backend Server listening on port ${port}`));
-
-// GET ALL PROFILES
-app.get('/api/profiles', (req, res) => {
-	db.collection('profiles').get().then(snapshot =>{
-		snapshot.forEach((doc) => {
-			console.log(doc.id, '=>', doc.data());
-		});
-	});
-});
 
 module.exports = app;
 
