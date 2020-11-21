@@ -1,0 +1,23 @@
+{
+  "name": "fitfromhome",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aryavatan/FitFromHome.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aryavatan/FitFromHome/issues"
+  },
+  "homepage": "https://github.com/aryavatan/FitFromHome#readme",
+  "description": "",
+  "dependencies": {
+    "curl": "^0.1.4",
+    "express": "^4.17.1"
+  }
+}
