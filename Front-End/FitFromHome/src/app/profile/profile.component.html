@@ -1,1 +1,18 @@
-<p>profile works!</p>
+<h1>Trainers Profile</h1>
+
+<div class="container" *ngFor="let profileInfo of profile">
+    <h2> {{ profileInfo.fullName }} </h2>
+    <h3> {{ profileInfo.category }} </h3>
+    <h4> {{ profileInfo.description }} </h4>
+</div>
+
+<div class="container">
+    <div class="classes-div" *ngFor="let class of trainersClass; let i=index">
+        <div class="content-box">
+            <h3>Title: {{ class.classes.title }}</h3>
+            <p>Description: {{ class.classes.description }}</p>
+            <p>Price: {{ class.classes.price }} </p>
+            <p>Date: {{ class.classes.startDate }} </p>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Profile, TrainersClassList } from './profile.model';
+import { ClassListComponent } from '../explore/class-list/class-list.component';
 
 @Component({
   selector: 'app-profile',
@@ -6,6 +8,44 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+
+  profile: Profile[] = [ 
+      {
+        fullName: "Chelsea",
+        category: "Fitness",
+        description: "I'm healthy"
+    }
+  ]
+
+  trainersClass: TrainersClassList[] = [
+    {
+      classes:
+        { 
+          
+        classId: "1",
+        title: "yoga class with chelsea",
+        createdBy: "Chelsea",
+        description: "this is a yoga class",
+        category: "yoga",
+        price: "15",
+        startDate: 12/20/20,
+        endDate: 12/20/20
+      }
+     },
+    {
+      classes: 
+        { 
+        classId: "2",
+        title: "HIIT class with chelsea",
+        createdBy: "Chelsea",
+        description: "this is a HIIT class",
+        category: "HIIT",
+        price: "15",
+        startDate: "12/12/20",
+        endDate: "12/12/20"
+      }
+    }
+  ]
 
   constructor() { }
 
