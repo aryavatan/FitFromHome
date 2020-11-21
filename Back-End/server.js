@@ -13,6 +13,7 @@ const db = admin.firestore();
 
 // API Routes
 const ClassRoutes = require('./API/classRoutes.js');
+const ProfileRoutes = require('./API/profileRoutes.js')
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use(cors());
 // ======================================================================================
 // Use Routes
 app.use('/api/classes', ClassRoutes);
+app.use('/api/profiles',ProfileRoutes);
 
 // ======================================================================================
 // Start Server
