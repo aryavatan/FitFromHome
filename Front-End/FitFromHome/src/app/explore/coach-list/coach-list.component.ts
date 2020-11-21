@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Coach } from '../coach.model';
 
 @Component({
     selector: 'app-coach-list',
@@ -6,16 +7,17 @@ import { Component } from '@angular/core';
     styleUrls: ['./coach-list.component.scss']
 })
 export class CoachListComponent{
-    coaches = [
+    searchWord: string;
+    coaches: Coach[] = [
         {
-          id: "1",
+          coachId: "1",
           name: "demir",
           category: "yoga"
         },
         {
-          id: "2",
+          coachId: "2",
           name: "arya",
-          category: "strenght"
+          category: "strength"
         }
       ];
     constructor() {

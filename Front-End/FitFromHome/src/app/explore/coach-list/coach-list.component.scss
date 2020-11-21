@@ -1,3 +1,19 @@
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex: 1 1 auto;
+    justify-content: space-around;
+    margin-bottom: 3%;
+  }
+
+  button {
+    font-size: 18px;
+    color: white;
+    background-color: #444166;
+  }
+
 .coach {
     border: 1px solid black;
     border-radius: 5%;

@@ -10,6 +10,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { ClassComponent } from './class/class.component';
 import { ClassListComponent } from './explore/class-list/class-list.component';
 import { CoachListComponent } from './explore/coach-list/coach-list.component';
+import { ClassListFilerPipe } from './explore/class-list/class-list-filter.pipe';
+import { CoachListFilerPipe } from './explore/coach-list/coach-list-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { CoachListComponent } from './explore/coach-list/coach-list.component';
     ProfileComponent,
     ClassComponent,
     ClassListComponent,
-    CoachListComponent
+    CoachListComponent,
+    ClassListFilerPipe,
+    CoachListFilerPipe
   ],
   imports: [
     BrowserModule,

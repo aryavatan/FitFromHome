@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./explore.component.scss']
 })
 export class ExploreComponent implements OnInit {
+  searchWord: string;
   classesSelected = true;
 
   constructor() { }
@@ -16,5 +17,9 @@ export class ExploreComponent implements OnInit {
 
   toggleCategory() {
     this.classesSelected = !this.classesSelected;
+  }
+
+  get FilterKey() {
+    return this.searchWord;
   }
 }
