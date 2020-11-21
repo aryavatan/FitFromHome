@@ -1,13 +1,15 @@
 <div class="container">
     <h1>Explore</h1>
-    <ul>
+
+    <ul class="classandcoach">
         <li>
-            <button (click)="toggleCategory()">Classes</button>
+            <button (click)="toggleClasses()" [class]="classesButtonClass">Classes</button>
         </li>
         <li>
-            <button (click)="toggleCategory()">Coaches</button>
+            <button (click)="toggleCoaches()" [class]="coachesButtonClass">Coaches</button>
         </li>
     </ul>
+
     <hr>
 
 

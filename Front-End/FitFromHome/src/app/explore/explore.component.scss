@@ -1,50 +1,55 @@
-$purple:#444166;
-$orange:#f6b579;
-$red:#e64861;
-$grey:#cacace;
+$purple: #444166;
+$orange: #f6b579;
+$red: #e64861;
+$grey: #cacace;
 
+ul.classandcoach {
+	list-style: none;
+	padding: 0;
+	margin: 0 auto;
+	display: flex;
+	flex: 1 1 auto;
 
-ul {
-    list-style: none;
-    padding: 0;
-    margin: 0 auto;
-    display: flex;
-    flex: 1 1 auto;
-   
-  }
+	li {
+		padding: 5px
+	}
+}
 
-  button {
-    background-color: $purple;
-    width: 100%;
-    border: none;
-    outline: none;
-    padding: 10px;
-    font-size: 24px;
-    border-radius: 20px;
-    
-    color: white;
-    font-weight: bold;
+button {
+	background-color: $purple;
+	width: 100%;
+	border: none;
+	outline: none;
+	padding: 10px;
+	font-size: 24px;
+	border-radius: 20px;
 
-    text-align: center;
-    cursor: pointer;
-    transition: .2s ease;
+	color: white;
+	font-weight: bold;
 
-    &:hover {
-        background-color: $red;
-        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-    }
-  }
+	text-align: center;
+	cursor: pointer;
+	transition: 0.2s ease;
 
-  hr {
-    margin: 2% auto;
-  }
+	&:hover {
+		background-color: $red;
+		box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+	}
 
-  .container {
-    width: 80%;
-  }
+	&.selected {
+		background-color: $red;
+	}
+}
 
-  .category-list {
-    margin: 0 auto;
-    margin-bottom: 3%;
-  }
-  
+hr {
+	margin: 2% auto;
+}
+
+.container {
+	width: 80%;
+}
+
+.category-list {
+	margin: 0 auto;
+	margin-bottom: 3%;
+}
