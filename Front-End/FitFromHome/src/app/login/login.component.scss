@@ -26,9 +26,10 @@ section{
         align-items: center;
         justify-content: center;
         padding: 20px;
+		border: solid $purple 1px;
 		border-radius: 20px;
 		
-		box-shadow: 2px 2px #888888;
+		box-shadow: 2px 2px $purple;
     
         div.form-group{
             width: 100%;

@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
 
 	email: string;
-	password: Text;
+	password: string;
 
 	statusDisplay: any;  // Bool for activating status message
 	statusAnimation: any;  // String for activating animation of status message
@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
 		let password = loginForm.value.password;
 
 		if (this.validateEmail(email) == false) {
-			this.statusText = 'Please enter a valid email';
 			this.activateStatusMessage();
 		}
 		else if (this.validatePassword(password) == false){
@@ -39,9 +38,11 @@ export class LoginComponent implements OnInit {
 	// Validates the email
 	validateEmail(email) {
 		if (!email){
+			this.statusText = 'Please enter a valid email';
 			return false;
 		}
-		else if (email.includes("@") && email.includes(".") && email.length > 9) {
+		else if (email.includes("@") && email.includes(".") && email.length < 9) {
+			this.statusText = 'Please enter a valid email';
 			return true;
 		}
 		else {
