@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { HTTPService } from '../services/http.service';
+import { Class } from './class.model';
 
 @Component({
   selector: 'app-explore',
@@ -11,8 +14,8 @@ export class ExploreComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-    // fetch & store classes + coach profiles
+  ngOnInit(){
+
   }
 
   toggleCategory() {
@@ -22,4 +25,5 @@ export class ExploreComponent implements OnInit {
   get FilterKey() {
     return this.searchWord;
   }
+  
 }

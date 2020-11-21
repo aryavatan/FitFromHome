@@ -1,10 +1,29 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { map, single, tap } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
+import { Class } from '../explore/class.model';
+import { Subject } from 'rxjs';
+
+
+interface ClassData {
+	classId: string;
+    title: string;
+    createdBy: string;
+    description: string;
+    category: string;
+    price: string;
+    startDate: any;
+    endDate: any;
+}
 
 @Injectable({
 	providedIn: 'root'
 })
 export class HTTPService {
+	private classes: Class[] = [];
+	private classesUpdated = new Subject<Class[]>();
 
 	constructor(private http: HttpClient) { }
 
@@ -32,7 +51,23 @@ export class HTTPService {
 		// return this.http.get("localhost:8080/api/user", data).toPromise();
 	}
 
+	// 
 	getAllClasses(){
-		return this.http.get(this.url + "classes").toPromise();
+		return this.http.get<{fetchedClasses}>(this.url + "classes").pipe(map(classData =>{
+			classData.fetchedClasses.map(singleClass => {
+				this.classes.push({
+					classId: singleClass.id,
+					title: singleClass.title,
+					createdBy: singleClass.createdBy,
+					description: singleClass.description,
+					category: singleClass.category,
+					price: singleClass.price,
+					startDate: singleClass.startDate,
+					endDate: singleClass.endDate
+				});
+			});
+			return this.classes;
+		})
+		)
 	}
 }

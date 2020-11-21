@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HTTPService } from 'src/app/services/http.service';
 import { Class } from '../class.model';
 //import { Explore } from '../explore.component';
 
@@ -7,8 +8,12 @@ import { Class } from '../class.model';
     templateUrl: './class-list.component.html',
     styleUrls: ['./class-list.component.scss']
 })
-export class ClassListComponent {
+export class ClassListComponent implements OnInit{
     searchWord: string;
+    testVar: any;
+    
+    // holds classes in db
+    fetchedClasses: any[] = [];
     classes: Class[] = [
         {
           classId: '123',
@@ -32,10 +37,15 @@ export class ClassListComponent {
         }
       ];
 
-      constructor() {}
+      constructor(private httpService: HTTPService) {}
 
-      getSearchTerm() {
-        //this.searchTerm = explore.getFilterKey();
+      ngOnInit() {
+        this.httpService.getAllClasses().subscribe(classArray => {
+            this.fetchedClasses = classArray;
+            console.log(this.fetchedClasses);
+          }); 
       }
+
+
 
 }
