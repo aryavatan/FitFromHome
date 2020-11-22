@@ -7,4 +7,5 @@ export interface Class {
     price: string;
     startDate: any;
     endDate: any;
+    creatorId: string;
 }

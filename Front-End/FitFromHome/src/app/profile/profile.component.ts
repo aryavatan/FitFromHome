@@ -34,7 +34,8 @@ export class ProfileComponent implements OnInit {
         category: "yoga",
         price: "15",
         startDate: 12/20/20,
-        endDate: 12/20/20
+        endDate: 12/20/20,
+        creatorId: '123'
       }
      }
     

@@ -30,7 +30,8 @@ export class ClassComponent implements OnInit {
         category: response.fetchedClass.category,
         price: response.fetchedClass.price,
         startDate: response.fetchedClass.startDate,
-        endDate: response.fetchedClass.endDate
+        endDate: response.fetchedClass.endDate,
+        creatorId: response.fetchedClass.creatorId
       }
       this.classData = fetchedClass;
     });

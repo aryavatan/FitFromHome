@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { expressionType } from '@angular/compiler/src/output/output_ast';
 
 
+
 interface ClassData {
 	classId: string;
     title: string;
@@ -203,7 +204,8 @@ export class HTTPService{
 					category: singleClass.category,
 					price: singleClass.price,
 					startDate: singleClass.startDate,
-					endDate: singleClass.endDate
+					endDate: singleClass.endDate,
+					creatorId: singleClass.creatorId
 				});
 			});
 			return this.classes;
@@ -223,10 +225,17 @@ export class HTTPService{
 		})
 	}
 
-	addNewClass() {
-		return this.http.post<{classId}>(this.url + 'classes', {
-			
-		})
+	addNewClass(title, createdBy, description, category, price, startDate, endDate, creatorId) {
+		return this.http.post<{classID}>(this.url + 'classes', {
+			title: title,
+			createdBy: createdBy,
+			description: description, 
+			category: category,
+			price: price,
+			startDate: startDate,
+			endDate: endDate,
+			creatorId: creatorId
+		});
 	}
 
 	getClassesForUser(userId: string){

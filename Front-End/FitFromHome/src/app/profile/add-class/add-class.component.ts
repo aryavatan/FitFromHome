@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HTTPService } from 'src/app/services/http.service';
 
 @Component({
@@ -8,7 +9,13 @@ import { HTTPService } from 'src/app/services/http.service';
 })
 export class AddClassComponent {
 
-    constructor(private httpService: HTTPService) {}
+    creatorId;
+
+    constructor(private httpService: HTTPService, private route: ActivatedRoute, private router: Router) {
+        if (this.route.snapshot.params['id']) {
+            this.creatorId = this.route.snapshot.paramMap.get('id');
+          }
+    }
 
     price;
     title;
@@ -19,10 +26,28 @@ export class AddClassComponent {
     endDate;
     startDate;
 
-    
+    createdClassId;
+
+
 
     onSubmit(addClassForm){
-
+        this.title = addClassForm.value.title;
+        this.createdBy = addClassForm.value.createdBy;
+        this.description = addClassForm.value.description;
+        this.category = addClassForm.value.category;
+        this.price = addClassForm.value.price;
+        this.startDate = addClassForm.value.startDate;
+        this.endDate = addClassForm.value.endDate;
+        
+        this.httpService.addNewClass(this.title, this.createdBy, this.description,
+             this.category, this.price, this.startDate, this.endDate, this.creatorId)
+             .subscribe(response => {
+                 this.createdClassId = response.classID;
+                 console.log(this.createdClassId);
+                 this.httpService.AddClassToUser(this.creatorId, this.createdClassId);
+                 //this.router.navigate(['/profiles', this.creatorId]);
+             });
+        
     }
 
 }
