@@ -11,11 +11,14 @@
   <br/>
   <div>
     <h1>Recommended Classes For You!</h1>
-    <div *ngFor="let recommendedClass of classes" [routerLink]="['../class', recommendedClass.classId]">
-        <h1>{{ recommendedClass.title }}</h1>
-            <p>Instructor: {{ recommendedClass.createdBy }}</p>
-            <p>${{recommendedClass.price}}/session</p>
-            <p>{{recommendedClass.description}}</p>
+    <div *ngFor="let recommendedClass of classes; let i=index" [routerLink]="['../class', recommendedClass.classId]">
+      <div *ngIf="i<3">
+        <h1>{{ recommendedClass[i].title }}</h1>
+            <p>Instructor: {{ recommendedClass[i].createdBy }}</p>
+            <p>${{recommendedClass[i].price}}/session</p>
+            <p>{{recommendedClass[i].description}}</p>
+      </div>  
+  
     </div>
   </div>
   <br/>
