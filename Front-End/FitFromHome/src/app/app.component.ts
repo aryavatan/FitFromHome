@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HTTPService } from './services/http.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,9 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'FitFromHome';
 
+  constructor(private httpService: HTTPService) {}
+
   logout() {
-    console.log('logout');
+    this.httpService.logout();
   }
 }

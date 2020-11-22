@@ -42,10 +42,12 @@ export class SignupComponent implements OnInit {
 		else {
 			// SIGN UP HERE !!!!!
 			console.log('req sent ')
-			this.httpService.postNewUser(this.email, this.password).subscribe(resData => {
-				console.log(resData)
-				this.router.navigateByUrl('/');
-			});
+			this.httpService.signup(this.email, this.password);
+			
+			// .subscribe(resData => {
+			// 	console.log(resData)
+			// 	this.router.navigateByUrl('/');
+			// });
 		}
 	}
 
