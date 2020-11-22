@@ -30,7 +30,8 @@ router.post('/', (req, res) => {
 	db.collection('users').doc(id).set({
 		fullName: fullName,
 		isTrainer: isTrainer,
-		username: email
+		username: email,
+		classId: []
 	}).then(() => {
 		console.log('New user created: ' + id);
 		res.status(200).send('New user created: ' + id);
