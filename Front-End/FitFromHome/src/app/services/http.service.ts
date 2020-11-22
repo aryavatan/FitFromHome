@@ -87,6 +87,10 @@ export class HTTPService{
 			const token = response.idToken
 			this.token = token;
 			if (token) {
+				// getUser(response.idToken)
+				// 
+
+
 				const expirationTime = +response.expiresIn;
 				this.setAuthTimer(expirationTime);
 				this.isAuthenticated = true;
