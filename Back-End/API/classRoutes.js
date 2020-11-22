@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 	let classes = [];
 	db.collection('classes').get().then((snapshot) =>{
 		snapshot.forEach((doc) => {
-			console.log(doc.id, '=>', doc.data());
+			//console.log(doc.id, '=>', doc.data());
 				classes.push(
 					{
 						id: doc.id,
