@@ -44,10 +44,6 @@ export class HomeComponent implements OnInit {
       console.log("HOME:"+this.classes);
     });
 
-    this.httpService.getUsersClasses(this.id).subscribe(classArray => {
-      this.userClasses = classArray;
-      console.log(this.userClasses);
-    })
   }
   
   view: CalendarView = CalendarView.Month;
@@ -62,6 +58,21 @@ export class HomeComponent implements OnInit {
   modalData: {
     event: CalendarEvent;
   };
+
+  events: CalendarEvent[] = [
+    {
+      start: subDays(startOfDay(new Date()), 1),
+      end: addDays(new Date(), 1),
+      title: 'A 3 day event',
+      allDay: true,
+      resizable: {
+        beforeStart: true,
+        afterEnd: true,
+      },
+      draggable: true,
+    },
+  ]
+
 
 }
 
