@@ -8,7 +8,7 @@ import { Class } from '../class.model';
 	styleUrls: ['./class-list.component.scss']
 })
 export class ClassListComponent implements OnInit {
-	searchWord: string;
+	searchWord: string = "All";
 	testVar: any;
 
 	// holds all classes in db
@@ -33,7 +33,9 @@ export class ClassListComponent implements OnInit {
 					});
 				}
 			});
+
 		});
+		this.filterSelected("All");
 	}
 
 	// Update the filter selected and the filtered classes

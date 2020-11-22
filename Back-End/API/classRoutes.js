@@ -49,7 +49,7 @@ router.get('/:id', async (req, res) => {
 			price: doc.data().price,
 			startDate: doc.data().startDate,
 			endDate: doc.data().endDate,
-			creatorId: doc.date().creatorId
+			creatorId: doc.data().creatorId
 		}
 		console.log(oneClass)
 		res.status(200).json({

@@ -11,10 +11,10 @@
 </div>
 
 <div class="row">
-    <div class="column" *ngFor="let class of fetchedClasses; let i=index">
+    <div class="column" *ngFor="let class of fetchedClasses; let i=index" [routerLink]="['/class', class.id]">
         <div class="content-box">
-            <h3>Title: {{ class.title }}</h3>
-            <p>Description: {{ class.description }}</p>
+            <h3>{{ class.title }}</h3>
+            <p>{{ class.description }}</p>
             <p>Price: {{ class.price }} </p>
             <p>Date: {{ class.startDate }} </p>
         </div>

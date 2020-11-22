@@ -50,6 +50,7 @@ button {
 	margin: 0;
 
 	.column {
+		background-color: white;
 		border: 1px solid black;
 		border-radius: 20px;
 		float: left;
@@ -63,11 +64,12 @@ button {
 		.content-box {
 			padding: 10px;
 		}
+
+		&:hover {
+			background-color: $orange;
+		}
 	}
 
 }
 
 
-.column:hover {
-	background-color: $orange;
-}

@@ -28,6 +28,9 @@
             <button (click)="deleteClass(classData.classId)">
                 Delete Class
             </button>
+
+            <button *ngIf="!isTrainer" routerLink="/watcher">Join Class</button>
+            <button *ngIf="isTrainer" routerLink="/broadcast">Start Class</button>
         </div>
 
     </div>

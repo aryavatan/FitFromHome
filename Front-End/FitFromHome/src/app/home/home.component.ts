@@ -31,7 +31,7 @@ import { HTTPService } from '../services/http.service';
 export class HomeComponent implements OnInit {
 
   classes: Class[] = []
-
+  searchWord: string = "All";
   userClasses: Class[] = []
 
   userId = localStorage.getItem("id");
@@ -79,7 +79,9 @@ export class HomeComponent implements OnInit {
     },
   ]
 
-
+  get FilterKey() {
+    return this.searchWord;
+  }
 }
 
 
