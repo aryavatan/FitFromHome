@@ -40,4 +40,12 @@ export class ClassComponent implements OnInit {
     this.http.deleteClass(id);
   }
 
+  registerClass(){
+    let userId = 'test' // TODO: Get actual id of user thats logged in
+    let classId = this.classData.classId;
+    
+    this.http.AddClassToUser(userId, classId)
+    .then(() => console.log(`Successfully added class ${classId} to user ${userId}`));
+  }
+
 }
