@@ -31,12 +31,17 @@
 				<label for="password">Confirm Password</label>
 				<input type="password" id="passwordConfirm" name="passwordConfirm" [(ngModel)]="passwordConfirm"/>
             </div>
-            
+			
 			<div class="form-group">
-				<button class="User" type="button" (click)="setIsTrainer()">I'm a Trainer!</button>
-				<button class="User" type="button" (click)="setIsClient()">I'm a Client!</button>
-				<button type="submit">Sign Up</button>
-				<button routerLink='/login'>Login</button>
+				<div class="user">
+					<button class="User" type="button" (click)="setIsClient()" [class]="userClass">I'm a User!</button>
+					<button class="User" type="button" (click)="setIsTrainer()" [class]="coachClass">I'm a Coach!</button>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<button class="controls" type="submit">Sign Up</button>
+				<button class="controls" routerLink='/login'>Login</button>
             </div>
             
 		</form>
