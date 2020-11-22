@@ -22,7 +22,7 @@
         </div>
 
         <div class="buttons">
-            <button (click)="registerClass()">
+            <button *ngIf="!isTrainer" (click)="registerClass()">
                 Register!
             </button>
             <button (click)="deleteClass(classData.classId)">

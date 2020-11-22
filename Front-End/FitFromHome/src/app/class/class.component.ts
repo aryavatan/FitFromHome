@@ -13,6 +13,9 @@ export class ClassComponent implements OnInit {
   selectedId;
   // holds info of class being fetched
   classData: Class;
+  isTrainer;
+  isTrainerListenerSub;
+
 
   constructor(private route: ActivatedRoute, private http: HTTPService) {
     if (this.route.snapshot.params['id']) {
@@ -33,6 +36,11 @@ export class ClassComponent implements OnInit {
         endDate: response.fetchedClass.endDate
       }
       this.classData = fetchedClass;
+    });
+
+    this.isTrainer = this.http.getIsTrainer();
+    this.isTrainerListenerSub = this.http.getTrainerStatusListener().subscribe(isTrain => {
+      this.isTrainer = isTrain;
     });
   }
 
