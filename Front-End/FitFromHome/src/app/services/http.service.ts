@@ -6,6 +6,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment'
 import { User } from './user.model';
 import { Router } from '@angular/router';
+import { expressionType } from '@angular/compiler/src/output/output_ast';
 
 
 interface ClassData {
@@ -34,9 +35,9 @@ interface AuthResponseData {
 })
 export class HTTPService{
 	private classes: Class[] = [];
+
 	private _user = new BehaviorSubject<User>(null);
-	private activeLogoutTimer: any;
-	//private classesUpdated = new Subject<Class[]>();
+	url = "http://localhost:8080/api/";
 
 	private isAuthenticated = false;
 	private token: string;
@@ -45,58 +46,29 @@ export class HTTPService{
 
 	constructor(private http: HttpClient, private router: Router) { }
 
-	get userIsAuthenticated () {
-		// double ! forces conversion to a boolean
-		return this._user.pipe(map(user => {
-		  if (user) {
-			return !!user.token;
-		  } else {
-			return false;
-		  }
-		}));
-	  }
-
-	  get userId() {
-		return this._user.asObservable().pipe(map(user => {
-		  if (user) {
-			return user.id;
-		  } else {
-			return null;
-		  }
-		}));
-	  }
-
-	  get userToken() {
-		return this._user.asObservable().pipe(map(user => {
-		  if (user) {
-			return user.token;
-		  } else {
-			return null;
-		  }
-		}));
-	  }
-
-	url = "http://localhost:8080/api/";
+	getIsAuth() {
+		return this.isAuthenticated;
+	}
 
 	// Sign up as new user
 	signup(email: string, password: string) {
 		return this.http.post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebase.apiKey}`, 
 		{email: email, password: password, returnSecureToken: true}
 		).subscribe(response => {
-			this.token = response.idToken;
-			if (this.token) {
-
-				const expirationTime = new Date (new Date().getTime() + (+response.expiresIn * 1000));
-				const user = new User(response.localId, response.email, response.idToken, expirationTime)
-				this._user.next(user);
-				console.log(expirationTime);
+			const token = response.idToken
+			this.token = token;
+			if (token) {
+				const expirationTime = +response.expiresIn;
+				this.setAuthTimer(expirationTime);
 				this.isAuthenticated = true;
-				this.saveAuthData(response.localId, response.idToken, expirationTime, response.email);
+				this.authStatusListener.next(true);
+				const now = new Date();
+				const expirationDate = new Date(now.getTime() + expirationTime * 1000);
+				this.saveAuthData(response.localId, response.idToken, expirationDate, response.email);
 				this.router.navigate(['/']);
 			}
 		});
 	}
-
 
 	logout() {
 		this.token = null;
@@ -109,23 +81,38 @@ export class HTTPService{
 
 	// Login User
 	login(email, password) {
-		return this.http.post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebase.apiKey}`,
+		this.http.post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebase.apiKey}`,
 		{email: email, password: password, returnSecureToken: true}
 		).subscribe(response => {
-			this.token = response.idToken;
-			if (this.token) {
-				
-				const expirationTime = new Date (new Date().getTime() + 10);
-				console.log('wcwc' + expirationTime);
-				
-				//new Date (new Date().getTime() + (+response.expiresIn * 1000));
-				const user = new User(response.localId, response.email, response.idToken, expirationTime)
-				this._user.next(user);
-				this.isAuthenticated = true;		
-				this.saveAuthData(response.localId, response.idToken, expirationTime, response.email);
+			const token = response.idToken
+			this.token = token;
+			if (token) {
+				// getUser(response.idToken)
+				// 
+
+
+				const expirationTime = +response.expiresIn;
+				this.setAuthTimer(expirationTime);
+				this.isAuthenticated = true;
+				this.authStatusListener.next(true);
+				const now = new Date();
+				const expirationDate = new Date(now.getTime() + expirationTime * 1000);
+				this.saveAuthData(response.localId, response.idToken, expirationDate, response.email);
 				this.router.navigate(['/']);
+				// //new Date (new Date().getTime() + (+response.expiresIn * 1000));
+				// const user = new User(response.localId, response.email, response.idToken, expirationTime)
+				// this._user.next(user);
 			}
 		});
+
+
+
+		setTimeout(() => {
+			if (!this.getIsAuth()) {
+			  alert('Login credentials are wrong.');
+			  return;
+		}
+		  }, 500);
 	}
 
 	// saves the currently logged in user info into local storage to keep user logged in upon page refresh
@@ -141,7 +128,7 @@ export class HTTPService{
 		console.log('Setting timer: ' + duration)
 		this.tokenTimer = setTimeout(() => {
 		  this.logout();
-		}, duration * 1);
+		}, duration * 1000);
 	  }
 
 	// clears user data from local storage
@@ -172,7 +159,7 @@ export class HTTPService{
 		const token = localStorage.getItem('token');
 		const expirationDate = localStorage.getItem('expiration');
 		if (!token && !expirationDate) { return; }
-		return {
+		return {	
 		  token: token,
 		  expirationDate: new Date(expirationDate)
 		};
@@ -200,6 +187,14 @@ export class HTTPService{
 
 	getClass(id: string) {
 		return this.http.get<{fetchedClass}>(this.url + `classes/${id}`);
+	}
+
+	deleteClass(id: string) {
+		this.http.delete(this.url + `classes/${id}`).subscribe(() => {
+			// filter out deleted class from classes array on front end
+			this.classes = this.classes.filter(cls => cls.classId !== id);
+			this.router.navigate(['/explore']);
+		})
 	}
 
 }
