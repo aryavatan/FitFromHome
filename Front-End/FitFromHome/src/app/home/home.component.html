@@ -1,3 +1,4 @@
+
 <h1>View Your Upcoming Classes:</h1>
   <div [ngSwitch]="view">
     <mwl-calendar-month-view
@@ -8,13 +9,44 @@
   </div>
   <br/>
   <br/>
+  <h1>Recommended Classes For You!</h1>
+  <div class="row">
+    <div class="column">
+      <div class="content-box" [routerLink]="['../class', classes[0].classId]">
+        <h1>{{ classes[0].title }}</h1>
+            <p>Instructor: {{ classes[0].createdBy }}</p>
+            <p>${{classes[0].price}}/session</p>
+            <p>{{classes[0].description}}</p>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <!-- <div class="row">
+        <div class="column">
+          <div class="content-box" [routerLink]="['../class', classes[1].classId]">
+            <h1>{{ classes[1].title }}</h1>
+                <p>Instructor: {{ classes[1].createdBy }}</p>
+                <p>${{classes[1].price}}/session</p>
+                <p>{{classes[1].description}}</p>
+              </div>
+            </div>
+          </div>
+
+          <br/>
+          <div class="row">
+            <div class="column">
+              <div class="content-box" [routerLink]="['../class', classes[2].classId]">
+                <h1>{{ classes[2].title }}</h1>
+                    <p>Instructor: {{ classes[2].createdBy }}</p>
+                    <p>${{classes[2].price}}/session</p>
+                    <p>{{classes[2].description}}</p>
+                  </div>
+                </div>
+              </div>
+   -->
+  <br/>
   <div>
-    <h1>Reccommended Classes For You!</h1>
-  <app-class-list></app-class-list>
-  </div>
-  
-  <div>
-    <h1>Your Progress: </h1>
+    <h1>“The difference between try and triumph is a little ‘umph’.”</h1>
   </div>
 
 

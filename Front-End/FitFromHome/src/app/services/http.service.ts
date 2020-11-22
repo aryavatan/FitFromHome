@@ -7,6 +7,8 @@ import { environment } from 'src/environments/environment'
 import { User } from './user.model';
 import { Router } from '@angular/router';
 import { expressionType } from '@angular/compiler/src/output/output_ast';
+import { id } from 'date-fns/locale';
+import { Profile } from '../profile/profile.model';
 
 
 
@@ -36,6 +38,7 @@ interface AuthResponseData {
 })
 export class HTTPService{
 	private classes: Class[] = [];
+	private profiles: Profile[] = [];
 
 	private _user = new BehaviorSubject<User>(null);
 	url = "http://localhost:8080/api/";
@@ -239,7 +242,7 @@ export class HTTPService{
 	}
 
 	getClassesForUser(userId: string){
-		return this.http.get<{classes}>(this.url + `classes/forUser/${userId}`);
+		return this.http.get(this.url + `classes/forUser/${userId}`);
 	}
 
 	AddClassToUser(userId:string, classId:string){
@@ -247,6 +250,10 @@ export class HTTPService{
 			userId: userId,
 			classId: classId
 		},  {responseType: 'text'});
+	}
+
+	getClassesCreatedByCoach(coachId) {
+		return this.http.get(this.url + `classes/forCoach/${coachId}`).toPromise();
 	}
 
 }

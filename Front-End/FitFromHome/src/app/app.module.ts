@@ -9,9 +9,7 @@ import { ExploreComponent } from './explore/explore.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ClassComponent } from './class/class.component';
 import { ClassListComponent } from './explore/class-list/class-list.component';
-import { CoachListComponent } from './explore/coach-list/coach-list.component';
 import { ClassListFilerPipe } from './explore/class-list/class-list-filter.pipe';
-import { CoachListFilerPipe } from './explore/coach-list/coach-list-filter.pipe';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
@@ -32,9 +30,7 @@ import { EditProfileComponent } from './profile/edit-profile/edit-profile.compon
     ProfileComponent,
     ClassComponent,
     ClassListComponent,
-    CoachListComponent,
     ClassListFilerPipe,
-    CoachListFilerPipe, 
     LoginComponent,
     SignupComponent,
     AddClassComponent,
