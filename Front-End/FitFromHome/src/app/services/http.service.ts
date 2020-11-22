@@ -51,22 +51,37 @@ export class HTTPService{
 	}
 
 	// Sign up as new user
-	signup(email: string, password: string) {
+	signup(email: string, password: string, isTrainer: boolean, name: string) {
 		return this.http.post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebase.apiKey}`, 
 		{email: email, password: password, returnSecureToken: true}
 		).subscribe(response => {
+			//this.http.post(this.url + "users", {id: response.idToken, name: name, isTrainer: isTrainer, email: email });
+			this.createUser(response.idToken, name, isTrainer, email);
+			
 			const token = response.idToken
 			this.token = token;
-			if (token) {
-				const expirationTime = +response.expiresIn;
-				this.setAuthTimer(expirationTime);
-				this.isAuthenticated = true;
-				this.authStatusListener.next(true);
-				const now = new Date();
-				const expirationDate = new Date(now.getTime() + expirationTime * 1000);
-				this.saveAuthData(response.localId, response.idToken, expirationDate, response.email);
-				this.router.navigate(['/']);
-			}
+
+
+			// if (token) {
+			// 	const expirationTime = +response.expiresIn;
+			// 	this.setAuthTimer(expirationTime);
+			// 	this.isAuthenticated = true;
+			// 	this.authStatusListener.next(true);
+			// 	const now = new Date();
+			// 	const expirationDate = new Date(now.getTime() + expirationTime * 1000);
+			// 	this.saveAuthData(response.localId, response.idToken, expirationDate, response.email);
+			// 	this.router.navigate(['/']);
+			// }
+			this.login(email, password);
+		});
+
+		
+	}
+
+	createUser(id : string, name: string, isTrainer: boolean, email: string ) {
+		console.log(id)
+		this.http.post(this.url + "users", {id: id, name: name, isTrainer: isTrainer, email: email }).subscribe(response => {
+			
 		});
 	}
 
