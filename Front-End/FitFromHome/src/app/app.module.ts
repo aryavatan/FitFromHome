@@ -20,7 +20,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 
 import { environment } from '../environments/environment';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 @NgModule({
