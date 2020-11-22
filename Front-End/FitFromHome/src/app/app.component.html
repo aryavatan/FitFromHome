@@ -10,7 +10,7 @@
 			<nav>
 				<ul>
 					<li *ngIf="isAuthenticated"><a href="#" routerLink="/" id="home">Your Schedule</a></li>
-					<li><a href="#" routerLink="/explore" id="explore">Explore Classes</a></li>
+					<li *ngIf="isAuthenticated"><a href="#" routerLink="/explore" id="explore">Explore Classes</a></li>
 					<li *ngIf="isTrainer"><a href="#" routerLink="/profiles" id="experience">Your Profile</a></li>
 					<li *ngIf="isAuthenticated"><a id="projects" (click)="logout()">Logout</a></li>
 				</ul>
