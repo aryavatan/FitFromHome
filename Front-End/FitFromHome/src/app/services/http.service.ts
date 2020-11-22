@@ -246,7 +246,7 @@ export class HTTPService{
 	}
 
 	getClassesForUser(userId: string){
-		return this.http.get(this.url + `classes/forUser/${userId}`).toPromise();
+		return this.http.get(this.url + `classes/forUser/${userId}`);
 	}
 
 	AddClassToUser(userId:string, classId:string){

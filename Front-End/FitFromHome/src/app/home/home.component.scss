@@ -3,15 +3,20 @@ $orange: #f6b579;
 $red: #e64861;
 $grey: #cacace;
 
-ul.classandcoach {
+p {
+	font-size: 16px;
+}
+
+ul {
 	list-style: none;
-	padding: 0;
-	margin: 0 auto;
+	padding-left: 5px;
+	margin: 0;
 	display: flex;
 	flex: 1 1 auto;
+	margin-bottom: 3%;
 
 	li {
-		padding: 5px
+		padding: 5px;
 	}
 }
 
@@ -20,12 +25,10 @@ button {
 	width: 100%;
 	border: none;
 	outline: none;
-	padding: 10px;
-	font-size: 24px;
+	padding: 8px;
+	font-size: 20px;
 	border-radius: 20px;
-
 	color: white;
-	font-weight: bold;
 
 	text-align: center;
 	cursor: pointer;
@@ -40,16 +43,31 @@ button {
 		background-color: $red;
 	}
 }
+.row {
+	display: flex;
+	flex-wrap: wrap;
+    flex-direction: row;
+	margin: 0;
 
-hr {
-	margin: 2% auto;
+	.column {
+		border: 1px solid black;
+		border-radius: 20px;
+		float: left;
+    	width: 30%;
+    	display: inherit;  // Sets project heights to be equal
+
+		margin: 5px;
+
+		cursor: pointer;
+		
+		.content-box {
+			padding: 10px;
+		}
+	}
+
 }
 
-.container {
-	width: 80%;
-}
 
-.category-list {
-	margin: 0 auto;
-	margin-bottom: 3%;
+.column:hover {
+	background-color: $orange;
 }

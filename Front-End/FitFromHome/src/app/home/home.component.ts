@@ -32,9 +32,9 @@ export class HomeComponent implements OnInit {
 
   classes: Class[] = []
 
-  userClasses: Class[]
+  userClasses: Class[] = []
 
-  id: "uvVmYAWZMKj0XLZP5JJJ"
+  userId = localStorage.getItem("id");
 
   constructor(private httpService: HTTPService) { }
 
@@ -43,8 +43,14 @@ export class HomeComponent implements OnInit {
 			this.classes = classArray;
       console.log("HOME:"+this.classes);
     });
+    
+    this.httpService.getClassesForUser(this.userId).subscribe(classArray => {
+      this.userClasses = classArray;
+      console.log(this.userClasses);
+    })
 
   }
+  
   
   view: CalendarView = CalendarView.Month;
 
