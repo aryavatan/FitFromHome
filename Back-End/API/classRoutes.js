@@ -122,4 +122,36 @@ router.put('/:id', (req,res) => {
 	});
 });
 
+// Get all classes for specific user
+// /api/classes/forUser/:id
+router.get('/forUser/:id', async (req, res) => {
+	let classIDs = [];
+	await db.collection('users').doc(req.params.id).get().then(user => {
+		if (!user.exists){
+			res.status(404).send("User not found");
+		}
+		else {
+			classIDs = user.data().classId;
+			console.log(user.data());
+			if (classIDs.length == 0){
+				console.log('User has no classes');
+				res.status(200).json([]);
+			}
+		}
+	}).catch(error => {
+		res.status(404).send("User not found");
+	});
+
+	let classes = [];
+	for (let i = 0; i < classIDs.length; i++){
+		let session = await db.collection('classes').doc(classIDs[i]).get();
+		if (session.exists){
+			console.log(session.data());
+			classes.push(session.data());
+		}
+	}
+
+	res.status(200).json(classes);
+});
+
 module.exports = router;
