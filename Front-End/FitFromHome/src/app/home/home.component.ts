@@ -40,9 +40,9 @@ export class HomeComponent implements OnInit {
   classes: Class[] = []
   userClasses: any = []
 
-  start: string 
-  end: string
-  title: string
+  start: string[] = []
+  end: string[] = []
+  title: string[] = []
 
   userId = localStorage.getItem("id");
 
@@ -55,24 +55,18 @@ export class HomeComponent implements OnInit {
     this.httpService.getClassesForUser(this.userId).then(classArray => {
       this.userClasses = classArray;
       console.log(this.userClasses);
+      for (let i = 0; i < this.userClasses.length ; i++) {
+        this.start.push(this.userClasses[i].startDate);
+        this.end.push(this.userClasses[i].endDate)
+        this.title.push(this.userClasses[i].title);
+      }
     });
 
     this.httpService.getAllClasses().subscribe(classArray => {
 			this.classes = classArray;
       console.log("HOME:"+this.classes);
-      for (let i = 0; i < this.userClasses.length ; i++) {
-        this.start = this.userClasses[i].startDate;
-        this.end = this.userClasses[i].endDate;
-        this.title = this.userClasses[i].title;
-      }
     });
     
-    // this.userClasses.forEach((index) => {
-    //   this.start = this.userClasses[index].startDate
-    //   this.end = this.userClasses[index].endDate
-    //   this.title = this.userClasses[index].title
-      
-    // });
   }
 
   activeDayIsOpen: boolean = true;
@@ -95,16 +89,22 @@ export class HomeComponent implements OnInit {
   };
 
   events: CalendarEvent[] = [
-    {
-      start: new Date(this.start),
-      end: new Date(this.end),
-      title: this.title
-    },
-    {
-      start: new Date("2020-11-25T13:00:00"),
-      end: new Date("2020-11-25T15:00:00"),
-      title: "HIIT With Chelsea"
-    }
+
+   { 
+    start: new Date(this.start.pop()),
+    end: new Date(this.end.pop()),
+    title: this.title.pop() 
+  },
+  { 
+    start: new Date("2020-11-26T15:30:00"),
+    end: new Date("2020-11-26T16:30:00"),
+    title: "Boxing With Arya!"
+  },
+  { 
+    start: new Date("2020-11-23T15:30:00"),
+    end: new Date("2020-11-23T16:30:00"),
+    title: "Strength Training With Demir!"
+  }
   ]
   handleEvent(event: CalendarEvent): void {
     this.modalData = { event };

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HTTPService } from 'src/app/services/http.service';
 import { Class } from '../class.model';
+import { Coach } from '../coach.model'
 
 @Component({
 	selector: 'app-class-list',
@@ -14,6 +15,7 @@ export class ClassListComponent implements OnInit {
 	// holds all classes in db
 	fetchedClasses: Class[] = [];
 
+	fetchedCoachBio: Coach[] = [];
 	// holds all filters for classes
 	filters: any[] = [{name:"All", class:"selected"}];
 
@@ -34,6 +36,8 @@ export class ClassListComponent implements OnInit {
 				}
 			});
 		});
+
+
 	}
 
 	// Update the filter selected and the filtered classes
