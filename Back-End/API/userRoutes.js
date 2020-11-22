@@ -19,4 +19,25 @@ router.get('/:id', (req, res) => {
 	});
 });
 
+// Create new user object
+// /api/users/
+router.post('/', (req, res) => {
+	let id = req.body.id;
+	let fullName = req.body.name;
+	let isTrainer = req.body.isTrainer;
+	let email = req.body.email;
+
+	db.collection('users').doc(id).set({
+		fullName: fullName,
+		isTrainer: isTrainer,
+		username: email
+	}).then(() => {
+		console.log('New user created: ' + id);
+		res.status(200).send('New user created: ' + id);
+	}).catch(() => {
+		console.log('Failed to create new user');
+		res.status(409).send('Failed to create new user');
+	})
+});
+
 module.exports = router;
