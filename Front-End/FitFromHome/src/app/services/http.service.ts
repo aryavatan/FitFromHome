@@ -135,18 +135,6 @@ export class HTTPService{
 					this.router.navigate(['/']);
 					
 				});
-
-				
-
-
-				// const expirationTime = +response.expiresIn;
-				// this.setAuthTimer(expirationTime);
-				// this.isAuthenticated = true;
-				// this.authStatusListener.next(true);
-				// const now = new Date();
-				// const expirationDate = new Date(now.getTime() + expirationTime * 1000);
-				// this.saveAuthData(response.localId, response.idToken, expirationDate, response.email);
-				// this.router.navigate(['/']);
 			}
 		});
 	}

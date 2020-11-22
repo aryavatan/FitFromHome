@@ -24,6 +24,7 @@ export class ProfileComponent implements OnInit {
   ]
 
   fetchedClasses;
+  fetchedCoach;
 
   coachId;
   constructor(private httpService: HTTPService) {
@@ -34,7 +35,10 @@ export class ProfileComponent implements OnInit {
     this.httpService.getClassesCreatedByCoach(this.coachId)
     .subscribe(classesArr => {
       this.fetchedClasses = classesArr;
-      console.log(this.fetchedClasses);
+    });
+
+    this.httpService.getUser(this.coachId).subscribe(response => {
+      this.fetchedCoach = response.user;
     });
   }
 
