@@ -44,10 +44,10 @@ export class HomeComponent implements OnInit {
       console.log("HOME:"+this.classes);
     });
     
-    this.httpService.getClassesForUser(this.userId).subscribe(classArray => {
-      this.userClasses = classArray;
-      console.log(this.userClasses);
-    })
+    // this.httpService.getClassesForUser(this.userId).subscribe(classArray => {
+    //   this.userClasses = classArray;
+    //   console.log(this.userClasses);
+    // })
 
   }
   
