@@ -33,8 +33,11 @@ export class ClassComponent implements OnInit {
         endDate: response.fetchedClass.endDate
       }
       this.classData = fetchedClass;
-      console.log(this.classData)
     });
+  }
+
+  deleteClass(id: string) {
+    this.http.deleteClass(id);
   }
 
 }

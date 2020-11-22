@@ -23,7 +23,6 @@ export class ClassListComponent implements OnInit {
 		// Get Classes
 		this.httpService.getAllClasses().subscribe(classArray => {
 			this.fetchedClasses = classArray;
-			console.log(this.fetchedClasses);
 
 			// Get Filters
 			this.fetchedClasses.forEach(session => {
@@ -34,7 +33,6 @@ export class ClassListComponent implements OnInit {
 					});
 				}
 			});
-			console.log(this.filters);
 		});
 	}
 
