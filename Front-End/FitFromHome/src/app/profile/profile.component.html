@@ -11,12 +11,12 @@
 </div>
 
 <div class="container">
-    <div class="classes-div" *ngFor="let class of trainersClass; let i=index">
+    <div class="classes-div" *ngFor="let class of fetchedClasses; let i=index">
         <div class="content-box">
-            <h3>Title: {{ class.classes.title }}</h3>
-            <p>Description: {{ class.classes.description }}</p>
-            <p>Price: {{ class.classes.price }} </p>
-            <p>Date: {{ class.classes.startDate }} </p>
+            <h3>Title: {{ class.title }}</h3>
+            <p>Description: {{ class.description }}</p>
+            <p>Price: {{ class.price }} </p>
+            <p>Date: {{ class.startDate }} </p>
         </div>
     </div>
 </div>

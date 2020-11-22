@@ -266,7 +266,7 @@ export class HTTPService{
 	}
 
 	getClassesCreatedByCoach(coachId) {
-		return this.http.get(this.url + `classes/forCoach/${coachId}`).toPromise();
+		return this.http.get<{classes}>(this.url + `classes/forCoach/${coachId}`);
 	}
 
 }

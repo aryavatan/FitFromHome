@@ -39,6 +39,5 @@ export class AddClassComponent implements OnInit{
                 this.createdClassId = response.classID;
                 this.router.navigate(['/explore']);
             })
-
     }
 }

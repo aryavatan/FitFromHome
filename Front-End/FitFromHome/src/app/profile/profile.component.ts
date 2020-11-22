@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Profile, TrainersClassList } from './profile.model';
 import { ClassListComponent } from '../explore/class-list/class-list.component';
 import { ActivatedRoute } from '@angular/router';
+import { HTTPService } from '../services/http.service';
+import { Class } from '../explore/class.model';
 
 @Component({
   selector: 'app-profile',
@@ -21,45 +23,19 @@ export class ProfileComponent implements OnInit {
     }
   ]
 
-  trainersClass: TrainersClassList[] = [
-    {
-      classes:
-        { 
-          
-        classId: "1",
-        title: "yoga class with chelsea",
-        createdBy: "Chelsea",
-        description: "this is a yoga class",
-        category: "yoga",
-        price: "15",
-        startDate: 12/20/20,
-        endDate: 12/20/20
-      }
-     },
-    {
-      classes: 
-        { 
-        classId: "2",
-        title: "HIIT class with chelsea",
-        createdBy: "Chelsea",
-        description: "this is a HIIT class",
-        category: "HIIT",
-        price: "15",
-        startDate: "12/12/20",
-        endDate: "12/12/20"
-      }
-    }
-  ]
+  fetchedClasses;
 
   coachId;
-  constructor(private route: ActivatedRoute) {
-    if (this.route.snapshot.params['id']) {
-      this.coachId = this.route.snapshot.paramMap.get('id');
-    }
+  constructor(private httpService: HTTPService) {
    }
 
-  ngOnInit(): void {
-    //console.log(this.coachId);
+  ngOnInit() {
+    this.coachId = localStorage.getItem('id');
+    this.httpService.getClassesCreatedByCoach(this.coachId)
+    .subscribe(classesArr => {
+      this.fetchedClasses = classesArr;
+      console.log(this.fetchedClasses);
+    });
   }
 
 }
