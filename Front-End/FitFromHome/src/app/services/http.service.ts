@@ -78,7 +78,7 @@ export class HTTPService{
 		return this.http.post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebase.apiKey}`, 
 		{email: email, password: password, returnSecureToken: true}
 		).subscribe(response => {
-			let backendId = response.idToken.split(".")[0]
+			let backendId = response.localId;
 			this.createUser(backendId, name, isTrainer, email);
 			const token = response.idToken
 			this.token = token;
@@ -115,7 +115,7 @@ export class HTTPService{
 			this.token = token;
 
 			if (token) {
-				let backEndID = response.idToken.split(".")[0];
+				let backEndID = response.localId;
 				let userIsTrainer: boolean;
 
 				this.getUser(backEndID).subscribe(resp => {
@@ -249,11 +249,11 @@ export class HTTPService{
 		return this.http.get(this.url + `classes/forUser/${userId}`).toPromise();
 	}
 
-	async AddClassToUser(userId:string, classId:string){
-		return await this.http.put(this.url + 'users/addClass', {
+	AddClassToUser(userId:string, classId:string){
+		return this.http.put(this.url + 'users/addClass', {
 			userId: userId,
 			classId: classId
-		});
+		},  {responseType: 'text'});
 	}
 
 }

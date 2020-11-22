@@ -112,4 +112,8 @@ export class SignupComponent implements OnInit {
 		this.isTrainer = true;
 	}
 
+	setIsClient() {
+		this.isTrainer = false;
+	}
+
 }

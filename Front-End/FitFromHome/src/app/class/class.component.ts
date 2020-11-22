@@ -41,11 +41,12 @@ export class ClassComponent implements OnInit {
   }
 
   registerClass(){
-    let userId = 'test' // TODO: Get actual id of user thats logged in
+    let userId = localStorage.getItem("id");
     let classId = this.classData.classId;
     
-    this.http.AddClassToUser(userId, classId)
-    .then(() => console.log(`Successfully added class ${classId} to user ${userId}`));
+    this.http.AddClassToUser(userId, classId).subscribe(resp => {
+      console.log(resp);
+    })
   }
 
 }
