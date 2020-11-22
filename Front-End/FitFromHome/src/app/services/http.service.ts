@@ -124,11 +124,7 @@ export class HTTPService{
 					if (this.isTrainer) {
 						this.trainerStatusListener.next(true);
 					}
-					// if(resp.user.isTrainer) {
-					// 	userIsTrainer = true;
-					// } else {
-					// 	userIsTrainer = false;
-					// }
+
 					const expirationTime = +response.expiresIn;
 					this.setAuthTimer(expirationTime);
 					this.isAuthenticated = true;
@@ -243,6 +239,19 @@ export class HTTPService{
 			this.classes = this.classes.filter(cls => cls.classId !== id);
 			this.router.navigate(['/explore']);
 		})
+	}
+
+	addNewClass(title, createdBy, description, category, price, startDate, endDate, creatorId) {
+		return this.http.post<{classID}>(this.url + 'classes', {
+			title: title,
+			createdBy: createdBy,
+			description: description, 
+			category: category,
+			price: price,
+			startDate: startDate,
+			endDate: endDate,
+			creatorId: creatorId
+		});
 	}
 
 	getClassesForUser(userId: string){

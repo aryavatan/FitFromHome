@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Profile, TrainersClassList } from './profile.model';
 import { ClassListComponent } from '../explore/class-list/class-list.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -50,9 +51,15 @@ export class ProfileComponent implements OnInit {
     }
   ]
 
-  constructor() { }
+  coachId;
+  constructor(private route: ActivatedRoute) {
+    if (this.route.snapshot.params['id']) {
+      this.coachId = this.route.snapshot.paramMap.get('id');
+    }
+   }
 
   ngOnInit(): void {
+    //console.log(this.coachId);
   }
 
 }
