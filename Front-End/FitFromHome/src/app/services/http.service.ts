@@ -256,4 +256,8 @@ export class HTTPService{
 		},  {responseType: 'text'});
 	}
 
+	getClassesCreatedByCoach(coachId) {
+		return this.http.get(this.url + `classes/forCoach/${coachId}`).toPromise();
+	}
+
 }

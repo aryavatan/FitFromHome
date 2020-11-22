@@ -154,4 +154,34 @@ router.get('/forUser/:id', async (req, res) => {
 	res.status(200).json(classes);
 });
 
+// Get all classes created by coach
+// api/classes/forCoach/:id
+router.get('/forCoach/:id', async (req,res) => {
+	let id = req.params.id;
+	const snapshot = await db.collection('classes').where('creatorId', '==', id).get();
+	if (snapshot.empty){
+		console.log('No classes found for coach');
+		res.status(404).send('No classes found for coach');
+		return;
+	}
+
+	let classes = [];
+	snapshot.forEach(doc => {
+		classes.push({
+			id: doc.id,
+			title: doc.data().title,
+			createdBy: doc.data().createdBy,
+			description: doc.data().description,
+			category: doc.data().category,
+			price: doc.data().price,
+			startDate: doc.data().startDate,
+			endDate: doc.data().endDate,
+			creatorId: doc.data().creatorId
+		});
+	});
+
+	console.log(classes);
+	res.status(200).json(classes);
+})
+
 module.exports = router;
