@@ -14,6 +14,7 @@ export class SignupComponent implements OnInit {
 	email : string;
 	password : string;
 	passwordConfirm : string;
+	isTrainer: boolean;
 
 	statusDisplay: any;  // Bool for activating status message
 	statusAnimation: any;  // String for activating animation of status message
@@ -29,6 +30,7 @@ export class SignupComponent implements OnInit {
 		this.password = signupForm.value.password;
 		this.fname = signupForm.value.fname;
 		this.lname = signupForm.value.lname;
+		let fullName = this.fname + " " + this.lname;
 		if (this.validateName(this.fname, this.lname) == false){
 			this.activateStatusMessage();
 		}
@@ -42,7 +44,8 @@ export class SignupComponent implements OnInit {
 		else {
 			// SIGN UP HERE !!!!!
 			console.log('req sent ')
-			this.httpService.signup(this.email, this.password);
+			console.log(this.isTrainer);
+			this.httpService.signup(this.email, this.password, this.isTrainer, fullName);
 			
 			// .subscribe(resData => {
 			// 	console.log(resData)
@@ -103,6 +106,10 @@ export class SignupComponent implements OnInit {
 		setTimeout(() => {
 			this.statusAnimation = "";
 		}, 100);
+	}
+
+	setIsTrainer() {
+		this.isTrainer = true;
 	}
 
 }
