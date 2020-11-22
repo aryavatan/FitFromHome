@@ -22,6 +22,7 @@ router.get('/', (req, res) => {
 						price: doc.data().price,
 						startDate: doc.data().startDate,
 						endDate: doc.data().endDate,
+						
 					}
 				)
 		});
@@ -48,6 +49,7 @@ router.get('/:id', async (req, res) => {
 			price: doc.data().price,
 			startDate: doc.data().startDate,
 			endDate: doc.data().endDate,
+			//creatorId: doc.data().creatorId
 		}
 		console.log(oneClass)
 		res.status(200).json({
@@ -69,7 +71,8 @@ router.post('/', (req, res) => {
 		category: req.body.category,
 		price: req.body.price,
 		startDate: req.body.startDate,
-		endDate: req.body.endDate
+		endDate: req.body.endDate,
+		//creatorId: req.body.creatorId
 	}).then(doc => {
 		console.log('Added a class document with ID: ' + doc.id);
 		res.status(200).json({classID: doc.id});

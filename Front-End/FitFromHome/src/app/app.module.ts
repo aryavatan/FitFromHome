@@ -20,6 +20,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import { environment } from '../environments/environment';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AddClassComponent } from './profile/add-class/add-class.component';
+import { EditProfileComponent } from './profile/edit-profile/edit-profile.compontent';
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     CoachListFilerPipe, 
     LoginComponent,
     SignupComponent,
-
+    AddClassComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Profile, TrainersClassList } from './profile.model';
 import { ClassListComponent } from '../explore/class-list/class-list.component';
+import { ActivatedRoute } from '@angular/router';
+import { HTTPService } from '../services/http.service';
 
 @Component({
   selector: 'app-profile',
@@ -34,25 +36,21 @@ export class ProfileComponent implements OnInit {
         startDate: 12/20/20,
         endDate: 12/20/20
       }
-     },
-    {
-      classes: 
-        { 
-        classId: "2",
-        title: "HIIT class with chelsea",
-        createdBy: "Chelsea",
-        description: "this is a HIIT class",
-        category: "HIIT",
-        price: "15",
-        startDate: "12/12/20",
-        endDate: "12/12/20"
-      }
-    }
+     }
+    
   ]
+  profileId;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute, private httpService: HTTPService) { 
+    if (this.route.snapshot.params['id']) {
+      this.profileId = this.route.snapshot.paramMap.get('id');
+    }
+  }
 
-  ngOnInit(): void {
+  ngOnInit(){
+    this.httpService.getClassesForUser(this.profileId).subscribe(response => {
+      console.log(response)
+    });
   }
 
 }

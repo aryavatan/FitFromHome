@@ -1,5 +1,16 @@
 <h1>Trainers Profile</h1>
 
+<div>
+  <ul>
+    <li>
+      <button [routerLink]="['/addClass', profileId]">Add Class</button>
+    </li>
+    <li>
+      <button [routerLink]="['/edit', profileId]">Edit Profile</button>
+    </li>
+  </ul>
+</div>
+
 <div class="container" *ngFor="let profileInfo of profile">
     <h2> {{ profileInfo.fullName }} </h2>
     <h3> {{ profileInfo.category }} </h3>

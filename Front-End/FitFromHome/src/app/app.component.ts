@@ -15,6 +15,7 @@ export class AppComponent implements OnInit, OnDestroy{
 
   isTrainer = false;
   private isTrainerListenerSub: Subscription;
+  userId;
 
   constructor(private httpService: HTTPService) {}
 
@@ -28,6 +29,8 @@ export class AppComponent implements OnInit, OnDestroy{
     this.isTrainerListenerSub = this.httpService.getTrainerStatusListener().subscribe(isTrain => {
       this.isTrainer = isTrain;
     });
+
+    this.userId = localStorage.getItem('id');
   }
 
   logout() {

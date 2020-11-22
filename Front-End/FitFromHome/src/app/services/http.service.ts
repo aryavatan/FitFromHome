@@ -113,19 +113,12 @@ export class HTTPService{
 
 			if (token) {
 				let backEndID = response.localId;
-				let userIsTrainer: boolean;
 
 				this.getUser(backEndID).subscribe(resp => {
-					//console.log(response);
 					this.isTrainer = resp.user.isTrainer;
 					if (this.isTrainer) {
 						this.trainerStatusListener.next(true);
 					}
-					// if(resp.user.isTrainer) {
-					// 	userIsTrainer = true;
-					// } else {
-					// 	userIsTrainer = false;
-					// }
 					const expirationTime = +response.expiresIn;
 					this.setAuthTimer(expirationTime);
 					this.isAuthenticated = true;
@@ -136,18 +129,6 @@ export class HTTPService{
 					this.router.navigate(['/']);
 					
 				});
-
-				
-
-
-				// const expirationTime = +response.expiresIn;
-				// this.setAuthTimer(expirationTime);
-				// this.isAuthenticated = true;
-				// this.authStatusListener.next(true);
-				// const now = new Date();
-				// const expirationDate = new Date(now.getTime() + expirationTime * 1000);
-				// this.saveAuthData(response.localId, response.idToken, expirationDate, response.email);
-				// this.router.navigate(['/']);
 			}
 		});
 	}
@@ -242,8 +223,14 @@ export class HTTPService{
 		})
 	}
 
+	addNewClass() {
+		return this.http.post<{classId}>(this.url + 'classes', {
+			
+		})
+	}
+
 	getClassesForUser(userId: string){
-		return this.http.get(this.url + `classes/forUser/${userId}`).toPromise();
+		return this.http.get<{classes}>(this.url + `classes/forUser/${userId}`);
 	}
 
 	AddClassToUser(userId:string, classId:string){
