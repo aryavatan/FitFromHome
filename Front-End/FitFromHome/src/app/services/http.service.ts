@@ -242,4 +242,15 @@ export class HTTPService{
 		})
 	}
 
+	getClassesForUser(userId: string){
+		return this.http.get(this.url + `classes/forUser/${userId}`).toPromise();
+	}
+
+	async AddClassToUser(userId:string, classId:string){
+		return await this.http.put(this.url + 'users/addClass', {
+			userId: userId,
+			classId: classId
+		});
+	}
+
 }
