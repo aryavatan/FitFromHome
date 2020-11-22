@@ -115,10 +115,7 @@ export class HTTPService{
 			this.token = response.idToken;
 			if (this.token) {
 				
-				const expirationTime = new Date (new Date().getTime() + 10);
-				console.log('wcwc' + expirationTime);
-				
-				//new Date (new Date().getTime() + (+response.expiresIn * 1000));
+				const expirationTime = new Date (new Date().getTime() + (+response.expiresIn * 1000));
 				const user = new User(response.localId, response.email, response.idToken, expirationTime)
 				this._user.next(user);
 				this.isAuthenticated = true;		
