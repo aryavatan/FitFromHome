@@ -2,7 +2,7 @@
     <div class="class-form">
         <div class="header">
             <h1> {{ classData.title }} </h1>
-            <h3>{{ classData.createdBy }}</h3>
+            <h3>Instructor: {{ classData.createdBy }}</h3>
             <h5>${{ classData.price }}/session</h5>
         </div>
 
@@ -21,7 +21,7 @@
             </p>
         </div>
 
-        <div>
+        <div class="buttons">
             <button (click)="registerClass()">
                 Register!
             </button>

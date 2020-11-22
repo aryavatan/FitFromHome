@@ -13,13 +13,43 @@ section {
     margin: 3% auto;
     border: solid $purple 1px;
     border-radius: 20px;
-    height: 80vh;
+    height: auto;
     background-color: $orange;
+    padding: 20px;
 
     div.description {
         align-items: center;
         justify-content: center;
-        
+    }
+
+    div.buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    button {
+        background-color: $purple;
+        border: none;
+        outline: none;
+        padding: 8px;
+        margin-right: 10px;
+        font-size: 20px;
+        border-radius: 20px;
+        color: white;
+    
+        text-align: center;
+        cursor: pointer;
+        transition: 0.2s ease;
+    
+        &:hover {
+            background-color: $red;
+            box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+        }
+    
+        &.selected {
+            background-color: $red;
+        }
     }
 }
 
