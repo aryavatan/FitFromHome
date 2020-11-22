@@ -7,6 +7,8 @@ import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './services/auth.guard';
 import { SignupComponent } from './signup/signup.component';
+import { BroadcastComponent } from './broadcast/broadcast.component';
+import { WatcherComponent } from './watcher/watcher.component';
 
 
 const routes: Routes = [
@@ -17,6 +19,8 @@ const routes: Routes = [
   { path: 'class/:id', component: ClassComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
+  { path: 'broadcast', component: BroadcastComponent},
+  { path: 'watcher', component: WatcherComponent},
 ];
 
 @NgModule({
