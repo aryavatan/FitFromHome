@@ -14,11 +14,14 @@ export class SignupComponent implements OnInit {
 	email : string;
 	password : string;
 	passwordConfirm : string;
-	isTrainer: boolean;
+	isTrainer: boolean = false;
 
 	statusDisplay: any;  // Bool for activating status message
 	statusAnimation: any;  // String for activating animation of status message
 	statusText: any;  // Text inside of status message
+
+	userClass : string = "selected";
+	coachClass : string = "";
 
 	constructor(private httpService: HTTPService, private router: Router) { }
 
@@ -109,10 +112,14 @@ export class SignupComponent implements OnInit {
 	}
 
 	setIsTrainer() {
+		this.coachClass = 'selected';
+		this.userClass = '';
 		this.isTrainer = true;
 	}
 
 	setIsClient() {
+		this.coachClass = '';
+		this.userClass = 'selected';
 		this.isTrainer = false;
 	}
 

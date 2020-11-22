@@ -3,20 +3,13 @@
 
     <ul class="classandcoach">
         <li>
-            <button (click)="toggleClasses()" [class]="classesButtonClass">Classes</button>
-        </li>
-        <li>
-            <button (click)="toggleCoaches()" [class]="coachesButtonClass">Coaches</button>
+            <button class="selected">Classes</button>
         </li>
     </ul>
 
     <hr>
 
-    <div *ngIf="classesSelected">
+    <div>
         <app-class-list></app-class-list>
-    </div>
-
-    <div *ngIf="!classesSelected">
-        <app-coach-list></app-coach-list>
     </div>
 </div>
