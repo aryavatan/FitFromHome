@@ -1,3 +1,4 @@
+
 <h1>View Your Upcoming Classes:</h1>
   <div [ngSwitch]="view">
     <mwl-calendar-month-view
@@ -9,12 +10,17 @@
   <br/>
   <br/>
   <div>
-    <h1>Reccommended Classes For You!</h1>
-  <app-class-list></app-class-list>
+    <h1>Recommended Classes For You!</h1>
+    <div *ngFor="let recommendedClass of classes" [routerLink]="['../class', recommendedClass.classId]">
+        <h1>{{ recommendedClass.title }}</h1>
+            <p>Instructor: {{ recommendedClass.createdBy }}</p>
+            <p>${{recommendedClass.price}}/session</p>
+            <p>{{recommendedClass.description}}</p>
+    </div>
   </div>
-  
+  <br/>
   <div>
-    <h1>Your Progress: </h1>
+    <h1>“The difference between try and triumph is a little ‘umph’.”</h1>
   </div>
 
 

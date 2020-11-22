@@ -3,9 +3,9 @@ import {
   OnInit,
   ChangeDetectionStrategy} from '@angular/core';
 
-  import {
-    CalendarView,
-  } from 'angular-calendar';
+import { CalendarView } from 'angular-calendar';
+import { Class } from '../explore/class.model';
+import { HTTPService } from '../services/http.service';
 
 @Component({
   selector: 'app-home',
@@ -15,10 +15,15 @@ import {
 })
 export class HomeComponent implements OnInit {
 
+  classes: Class[] = []
 
-  constructor() { }
+  constructor(private httpService: HTTPService) { }
 
   ngOnInit(): void {
+    this.httpService.getAllClasses().subscribe(classArray => {
+			this.classes = classArray;
+      console.log("HOME:"+this.classes);
+    });
   }
   
   view: CalendarView = CalendarView.Month;
@@ -29,6 +34,7 @@ export class HomeComponent implements OnInit {
   setView(view: CalendarView) {
     this.view = view;
   }
+
 
 }
 
