@@ -13,8 +13,10 @@ export class ProfileComponent implements OnInit {
       {
         fullName: "Chelsea",
         id: "123",
+        classId: "3",
         category: "Fitness",
-        description: "I'm healthy"
+        description: "I'm healthy",
+        isTrainer: true
     }
   ]
 
