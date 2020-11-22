@@ -84,4 +84,3 @@ app.get('/api/classes/:id', async (req, res) => {
 		}
 });
 
-

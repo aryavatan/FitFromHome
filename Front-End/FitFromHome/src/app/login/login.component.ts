@@ -36,10 +36,7 @@ export class LoginComponent implements OnInit {
 		}
 		else{
 			
-			this.httpService.loginUser(email, password).subscribe(resData =>{
-				console.log(resData);
-				this.router.navigateByUrl('/');
-			});
+			this.httpService.login(email, password);
 		}
 	}
 
