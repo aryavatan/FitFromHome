@@ -43,7 +43,7 @@ router.get('/:id', async (req, res) => {
 			}
 			console.log(oneProfile)
 			res.status(200).json({
-				fetchedClass: oneClass
+				fetchedProfiles: oneProfile
 			});
 		} else {
 			console.log("NOT FOUND");
