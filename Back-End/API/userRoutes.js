@@ -8,7 +8,9 @@ const db = admin.firestore();
 // Get specific user from DB
 // /api/users/:id
 router.get('/:id', (req, res) => {
+
 	let id = req.params.id;
+	console.log(req.params.id);
 	db.collection('users').doc(req.params.id).get().then(user => {
 		console.log(user.data());
 		res.status(200).json({

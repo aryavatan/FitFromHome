@@ -40,9 +40,13 @@ export class HTTPService{
 	url = "http://localhost:8080/api/";
 
 	private isAuthenticated = false;
+	private isTrainer = false;
 	private token: string;
 	private tokenTimer: any;
+	private trainerStatusListener = new Subject<boolean>();
 	private authStatusListener = new Subject<boolean>();
+
+	fetchedUser = {};
 
 	constructor(private http: HttpClient, private router: Router) { }
 
@@ -50,38 +54,37 @@ export class HTTPService{
 		return this.isAuthenticated;
 	}
 
+	getToken() {
+		return this.token;
+	}
+
+	getAuthStatusListener() {
+		return this.authStatusListener.asObservable();
+	}
+
+	getIsTrainer() {
+		return this.isTrainer;
+	}
+
+	getTrainerStatusListener() {
+		return this.trainerStatusListener.asObservable();
+	}
+
 	// Sign up as new user
 	signup(email: string, password: string, isTrainer: boolean, name: string) {
 		return this.http.post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebase.apiKey}`, 
 		{email: email, password: password, returnSecureToken: true}
 		).subscribe(response => {
-			//this.http.post(this.url + "users", {id: response.idToken, name: name, isTrainer: isTrainer, email: email });
-			this.createUser(response.idToken, name, isTrainer, email);
-			
+			let backendId = response.idToken.split(".")[0]
+			this.createUser(backendId, name, isTrainer, email);
 			const token = response.idToken
 			this.token = token;
-
-
-			// if (token) {
-			// 	const expirationTime = +response.expiresIn;
-			// 	this.setAuthTimer(expirationTime);
-			// 	this.isAuthenticated = true;
-			// 	this.authStatusListener.next(true);
-			// 	const now = new Date();
-			// 	const expirationDate = new Date(now.getTime() + expirationTime * 1000);
-			// 	this.saveAuthData(response.localId, response.idToken, expirationDate, response.email);
-			// 	this.router.navigate(['/']);
-			// }
 			this.login(email, password);
 		});
-
-		
 	}
 
 	createUser(id : string, name: string, isTrainer: boolean, email: string ) {
-		console.log(id)
 		this.http.post(this.url + "users", {id: id, name: name, isTrainer: isTrainer, email: email }).subscribe(response => {
-			
 		});
 	}
 
@@ -89,10 +92,16 @@ export class HTTPService{
 		this.token = null;
 		this.isAuthenticated = false;
 		this.authStatusListener.next(false);
+		this.trainerStatusListener.next(false);
 		clearTimeout(this.tokenTimer);
 		this.clearAuthData();
-		this.router.navigate(['/landing']);
+		this.router.navigate(['/login']);
 	  }
+
+	getUser(id: string) {
+		return this.http.get<{user}>(this.url + `users/${id}`)
+		
+	}
 
 	// Login User
 	login(email, password) {
@@ -101,41 +110,55 @@ export class HTTPService{
 		).subscribe(response => {
 			const token = response.idToken
 			this.token = token;
+
 			if (token) {
-				// getUser(response.idToken)
-				// 
+				let backEndID = response.idToken.split(".")[0];
+				let userIsTrainer: boolean;
+
+				this.getUser(backEndID).subscribe(resp => {
+					//console.log(response);
+					this.isTrainer = resp.user.isTrainer;
+					if (this.isTrainer) {
+						this.trainerStatusListener.next(true);
+					}
+					// if(resp.user.isTrainer) {
+					// 	userIsTrainer = true;
+					// } else {
+					// 	userIsTrainer = false;
+					// }
+					const expirationTime = +response.expiresIn;
+					this.setAuthTimer(expirationTime);
+					this.isAuthenticated = true;
+					this.authStatusListener.next(true);
+					const now = new Date();
+					const expirationDate = new Date(now.getTime() + expirationTime * 1000);
+					this.saveAuthData(response.localId, response.idToken, expirationDate, response.email, this.isTrainer);
+					this.router.navigate(['/']);
+					
+				});
+
+				
 
 
-				const expirationTime = +response.expiresIn;
-				this.setAuthTimer(expirationTime);
-				this.isAuthenticated = true;
-				this.authStatusListener.next(true);
-				const now = new Date();
-				const expirationDate = new Date(now.getTime() + expirationTime * 1000);
-				this.saveAuthData(response.localId, response.idToken, expirationDate, response.email);
-				this.router.navigate(['/']);
-				// //new Date (new Date().getTime() + (+response.expiresIn * 1000));
-				// const user = new User(response.localId, response.email, response.idToken, expirationTime)
-				// this._user.next(user);
+				// const expirationTime = +response.expiresIn;
+				// this.setAuthTimer(expirationTime);
+				// this.isAuthenticated = true;
+				// this.authStatusListener.next(true);
+				// const now = new Date();
+				// const expirationDate = new Date(now.getTime() + expirationTime * 1000);
+				// this.saveAuthData(response.localId, response.idToken, expirationDate, response.email);
+				// this.router.navigate(['/']);
 			}
 		});
-
-
-
-		setTimeout(() => {
-			if (!this.getIsAuth()) {
-			  alert('Login credentials are wrong.');
-			  return;
-		}
-		  }, 500);
 	}
 
 	// saves the currently logged in user info into local storage to keep user logged in upon page refresh
-  	private saveAuthData(id: string, token: string, expirationTimer: Date, email: string) {
+  	private saveAuthData(id: string, token: string, expirationTimer: Date, email: string, isTrainer: boolean) {
     localStorage.setItem('id', id);
     localStorage.setItem('token', token);
 	localStorage.setItem('expiration', expirationTimer.toISOString());
 	localStorage.setItem('email', email);
+	localStorage.setItem('isTrainer', `${isTrainer}`);
   }
 
 	// sets the timer to automatically log out a user
@@ -152,6 +175,7 @@ export class HTTPService{
 		localStorage.removeItem('token');
 		localStorage.removeItem('expiration');
 		localStorage.removeItem('email');
+		localStorage.removeItem('isTrainer');
 	}
 
 	// automatically authenticate logged in user if page is refreshed
@@ -163,6 +187,9 @@ export class HTTPService{
 		console.log(expiresIn)
 		if (expiresIn > 0) {
 		  this.token = authInformation.token;
+		  if (authInformation.isTrainer) {
+			  this.trainerStatusListener.next(true);
+		  }
 		  this.isAuthenticated = true;
 		  this.setAuthTimer(expiresIn / 1000);
 		  this.authStatusListener.next(true);
@@ -170,15 +197,18 @@ export class HTTPService{
 	   }
 
 	  // returns the information about the logged in user form local storage
-	  private getAuthData() {
+	private getAuthData() {
 		const token = localStorage.getItem('token');
 		const expirationDate = localStorage.getItem('expiration');
+		const trainerStat = localStorage.getItem('isTrainer');
+		console.log(trainerStat);
 		if (!token && !expirationDate) { return; }
 		return {	
 		  token: token,
-		  expirationDate: new Date(expirationDate)
+		  expirationDate: new Date(expirationDate),
+		  isTrainer: trainerStat
 		};
-	  }
+	}
 
 	getAllClasses(){
 		this.classes = [];

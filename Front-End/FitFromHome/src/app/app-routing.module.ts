@@ -3,16 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { ClassComponent } from './class/class.component';
 import { ExploreComponent } from './explore/explore.component';
 import { HomeComponent } from './home/home.component';
-import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AuthGuard } from './services/auth.guard';
 import { SignupComponent } from './signup/signup.component';
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'landing', component: LandingComponent },
-  { path: 'explore', component: ExploreComponent },
+  { path: '', component: HomeComponent, canActivate: [AuthGuard]},
+  { path: 'explore', component: ExploreComponent, canActivate: [AuthGuard] },
   { path: 'profiles', component: ProfileComponent },
   { path: 'profiles/:id', component: ProfileComponent },
   { path: 'class/:id', component: ClassComponent },
@@ -23,6 +22,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: []
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }
