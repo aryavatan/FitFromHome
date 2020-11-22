@@ -43,8 +43,9 @@ button {
 .row {
 	display: flex;
 	flex-wrap: wrap;
-  flex-direction: row;
+  	flex-direction: row;
 	margin: 0;
+	margin-top: 30px;
 
 	.column {
 		background-color: white;
@@ -67,4 +68,8 @@ button {
 		}
 	}
 
+}
+
+.container {
+	margin: 0;
 }
