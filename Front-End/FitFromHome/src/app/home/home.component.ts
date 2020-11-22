@@ -2,8 +2,23 @@ import {
   Component, 
   OnInit,
   ChangeDetectionStrategy} from '@angular/core';
+  import {
+    startOfDay,
+    endOfDay,
+    subDays,
+    addDays,
+    endOfMonth,
+    isSameDay,
+    isSameMonth,
+    addHours,
+  } from 'date-fns';
 
-import { CalendarView } from 'angular-calendar';
+import { 
+  CalendarEvent,
+  CalendarEventAction,
+  CalendarEventTimesChangedEvent,
+  CalendarView,
+ } from 'angular-calendar';
 import { Class } from '../explore/class.model';
 import { HTTPService } from '../services/http.service';
 
@@ -17,6 +32,10 @@ export class HomeComponent implements OnInit {
 
   classes: Class[] = []
 
+  userClasses: Class[]
+
+  id: "uvVmYAWZMKj0XLZP5JJJ"
+
   constructor(private httpService: HTTPService) { }
 
   ngOnInit(): void {
@@ -24,6 +43,11 @@ export class HomeComponent implements OnInit {
 			this.classes = classArray;
       console.log("HOME:"+this.classes);
     });
+
+    this.httpService.getUsersClasses(this.id).subscribe(classArray => {
+      this.userClasses = classArray;
+      console.log(this.userClasses);
+    })
   }
   
   view: CalendarView = CalendarView.Month;
@@ -35,6 +59,9 @@ export class HomeComponent implements OnInit {
     this.view = view;
   }
 
+  modalData: {
+    event: CalendarEvent;
+  };
 
 }
 

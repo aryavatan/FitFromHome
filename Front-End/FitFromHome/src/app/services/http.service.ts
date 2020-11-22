@@ -7,6 +7,8 @@ import { environment } from 'src/environments/environment'
 import { User } from './user.model';
 import { Router } from '@angular/router';
 import { expressionType } from '@angular/compiler/src/output/output_ast';
+import { id } from 'date-fns/locale';
+import { Profile } from '../profile/profile.model';
 
 
 interface ClassData {
@@ -35,6 +37,7 @@ interface AuthResponseData {
 })
 export class HTTPService{
 	private classes: Class[] = [];
+	private profiles: Profile[] = [];
 
 	private _user = new BehaviorSubject<User>(null);
 	url = "http://localhost:8080/api/";
@@ -195,6 +198,29 @@ export class HTTPService{
 			this.classes = this.classes.filter(cls => cls.classId !== id);
 			this.router.navigate(['/explore']);
 		})
+	}
+
+	getUsersClasses(id: string){
+		this.classes = [];
+		return this.http.get<{fetchedClasses}>(this.url + `forUsers/${id}`).pipe(map(classData =>{
+			classData.fetchedClasses.map(singleClass => {
+				if(singleClass.id == id){
+					this.classes.push({
+						classId: singleClass.id,
+						title: singleClass.title,
+						createdBy: singleClass.createdBy,
+						description: singleClass.description,
+						category: singleClass.category,
+						price: singleClass.price,
+						startDate: singleClass.startDate,
+						endDate: singleClass.endDate
+					});
+				}
+				
+			});
+			return this.classes;
+		})
+		)
 	}
 
 }

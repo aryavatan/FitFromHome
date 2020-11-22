@@ -8,7 +8,7 @@ const db = admin.firestore();
 
 // GET ALL PROFILES
 router.get('/', (req, res) => {
-	db.collection('profiles').get().then(snapshot =>{
+	db.collection('users').get().then(snapshot =>{
         let profiles = [];
 		snapshot.forEach((doc) => {
             console.log(doc.id, '=>', doc.data());
@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
                     id: doc.id,
                     fullName: doc.data().fullName,
                     category: doc.data.category,
-                    description: doc.data().description
+                    bio: doc.data().bio
                 }
             )
         });
@@ -32,13 +32,13 @@ router.get('/', (req, res) => {
 router.get('/:id', async (req, res) => {
 	let oneProfile = {};
 	console.log(req.params.id);
-	const profileRef = db.collection('profiles').doc(req.params.id);
+	const profileRef = db.collection('users').doc(req.params.id);
 	const doc = await profileRef.get()
 		if (doc.exists) {
 			oneProfile = {
                 id: doc.id,
                 fullName: doc.data().fullName,
-				description: doc.data().description,
+				bio: doc.data().bio,
 				category: doc.data().category
 			}
 			console.log(oneProfile)
@@ -49,5 +49,30 @@ router.get('/:id', async (req, res) => {
 			console.log("NOT FOUND");
 			res.status(404).status({message: "Profile not found!"});
 		}
+});
+
+//EDIT PROFILE
+router.put('/:id', (req,res) => {
+	let id = req.params.id;
+	const docRef = db.collection('users').doc(id);
+	
+	docRef.get().then(doc => {
+		if (!doc.exists) {
+			console.log('No document ' + id + " exists!");
+			res.status(404).json({Message:'No document ' + id + " exists!"});
+		}
+		else {
+			docRef.update({
+                fullName: doc.data().fullName,
+				bio: doc.data().bio,
+				category: doc.data().category
+			}).then(() => {
+				console.log("Document " + id + " successfully updated");
+				res.status(200).send("Document " + id + " successfully updated");
+			}).catch(() => {
+				res.status(500).send("Internal Server Error");;
+			});
+		}
+	});
 });
 
