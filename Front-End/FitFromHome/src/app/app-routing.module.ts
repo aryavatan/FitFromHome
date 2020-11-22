@@ -8,6 +8,8 @@ import { AddClassComponent } from './profile/add-class/add-class.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './services/auth.guard';
 import { SignupComponent } from './signup/signup.component';
+import { BroadcastComponent } from './broadcast/broadcast.component';
+import { WatcherComponent } from './watcher/watcher.component';
 
 
 const routes: Routes = [
@@ -18,7 +20,9 @@ const routes: Routes = [
   { path: 'class/:id', component: ClassComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'addClass/:id', component: AddClassComponent}
+  { path: 'addClass/:id', component: AddClassComponent},
+  { path: 'broadcast', component: BroadcastComponent},
+  { path: 'watcher', component: WatcherComponent},
 ];
 
 @NgModule({
