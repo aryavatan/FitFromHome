@@ -48,7 +48,7 @@ router.post('/', (req, res) => {
 router.put('/addClass', (req,res) => {
 	let uid = req.body.userId;
 	let cid = req.body.classId;
-
+	
 	let userRef = db.collection('users').doc(uid);
 	userRef.update({
 		classId: admin.firestore.FieldValue.arrayUnion(cid)
