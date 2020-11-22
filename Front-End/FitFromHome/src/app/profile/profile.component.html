@@ -1,15 +1,17 @@
 <h1>Trainers Profile</h1>
 
-<div>
-    <button [routerLink]="['/addClass', coachId]">Add Class</button>
-</div>
+
 
 <div class="container">
     <h2> {{ fetchedCoach.fullName }} </h2>
 </div>
 
-<div class="container">
-    <div class="classes-div" *ngFor="let class of fetchedClasses; let i=index">
+<div>
+    <button [routerLink]="['/addClass', coachId]">Add Class</button>
+</div>
+
+<div class="row">
+    <div class="column" *ngFor="let class of fetchedClasses; let i=index">
         <div class="content-box">
             <h3>Title: {{ class.title }}</h3>
             <p>Description: {{ class.description }}</p>
