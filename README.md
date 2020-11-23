@@ -13,4 +13,5 @@ Contributors include:
 - Darshan Mistry
 
 Hack Western 7 Devpost: https://devpost.com/software/fitfromhome
+
 FitFromHome Demo: https://www.youtube.com/watch?v=DuCgXj2TmyE&feature=youtu.be&ab_channel=AryaVatanabadi
